@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TestFinal.Views.ExpenditurePage"
+             xmlns:converters="clr-namespace:TestFinal.Coverter"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="Expenditure"
+             Icon="Expenditures.png"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <!--Header-->
+        <StackLayout HorizontalOptions="Start">
+            <Grid BackgroundColor="Black" 
+                      HeightRequest="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Total, Converter={StaticResource CovertToCurrency}}" 
+                           TextColor="PaleVioletRed"
+                           FontSize="Large" 
+                           Grid.Column="1"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"></Label>
+            </Grid>
+            <StackLayout HorizontalOptions="Fill"
+                             Orientation="Vertical"
+                             VerticalOptions="FillAndExpand">
+                <!-- Search -->
+                <Entry Placeholder="Search" Text="{Binding SearchContent}"
+                           HorizontalOptions="Center"
+                           WidthRequest="200">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                          Command="{Binding TextChangedSearchCommand}">
+                        </behaviors:EventToCommandBehavior>
+                    </Entry.Behaviors>
+                </Entry>
+                <!--Sort and statistic-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="10,0,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Text="Chosse the sort way"
+                                   Grid.Row="0"></Label>
+                            <Picker ItemsSource="{Binding SortWay}" 
+                                    SelectedIndex="{Binding SelectedWay, Mode=OneWayToSource}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    FontSize="18"
+                                    Grid.Row="1">
+
+                                <Picker.Behaviors>
+                                    <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                                      Command="{Binding SelectedChangedSortWayCommand}"></behaviors:EventToCommandBehavior>
+                                </Picker.Behaviors>
+                            </Picker>
+                        </Grid>
+                    </Grid>
+                    <Button Text="Statistic" 
+                            Command="{Binding StatisticCommand}"
+                            BackgroundColor="#48525e"
+                            Grid.Column="1"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" Margin="0,0,20,0"></Button>
+                </Grid>
+                <!--Show Expenditure list-->
+                <Grid VerticalOptions="FillAndExpand" Margin="10,0,5,0">
+                    <ListView ItemsSource="{Binding ExpenditureList, Mode=TwoWay}"
+                                  
+                                  SelectedItem="{Binding SelectedExpenditure, Mode=OneWayToSource}"
+                                  HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <StackLayout Margin="0,2,0,0">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                                <ColumnDefinition Width="2"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
+
+                                            </Grid.RowDefinitions>
+                                            <!--Icon for each Expenditure-->
+                                            <Image Grid.Column="0" 
+                                                       Grid.RowSpan="2"
+                                                       Grid.Row="0"
+                                                       Source="Icon.png"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"></Image>
+                                            <Label Grid.Column="2" Grid.Row="0"
+                                                       FontSize="Medium"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding TitleExpenditure}"
+                                                    ></Label>
+                                            <Label Grid.Column="2" Grid.Row="1"
+                                                       FontSize="Medium"
+                                                       Text="{Binding Category}"
+                                                    ></Label>
+
+                                            <Label Grid.Column="3" Grid.Row="0"
+                                                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
+                                                   FontSize="Medium"
+                                                   TextColor="PaleVioletRed"
+                                                    ></Label>
+                                            <Label Grid.Column="3" Grid.Row="1"
+                                                   FontSize="Medium"
+                                                   Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"
+                                                   ></Label>
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                                  Command="{Binding SelectedExpenditureCommand}">
+                            </behaviors:EventToCommandBehavior>
+                        </ListView.Behaviors>
+                    </ListView>
+                    <Button BorderRadius="50" 
+                                HorizontalOptions="End"
+                                VerticalOptions="End"
+                                Margin="0,0,15,40"
+                                HeightRequest="65"
+                                WidthRequest="65"
+                                FontSize="25" 
+                                Text="+"
+                                Command="{Binding AddExpenditureCommand}"></Button>
+                </Grid>
+
+            </StackLayout>
+            <!--Button add-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

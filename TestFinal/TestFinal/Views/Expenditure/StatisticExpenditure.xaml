@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:TestFinal.Coverter"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TestFinal.Views.StatisticExpenditure"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout HorizontalOptions="Fill"
+                     VerticalOptions="Fill">
+            <!--Header-->
+            <Grid BackgroundColor="Black" 
+                  HeightRequest="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width='250'></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Image="back.png"
+                        BackgroundColor="Black"
+                        Grid.Column="0"
+                        Margin="10"
+                        VerticalOptions="Center"
+                        Command="{Binding BackCommand}"
+                     ></Button>
+                <Label Text="STATISTIC" 
+                       TextColor="PaleVioletRed"
+                       FontSize="Large" 
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Center"
+                       Grid.Column="1"
+                   ></Label>
+            </Grid>
+            <StackLayout Margin="5">
+                <!--Date From - To -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Text="From Date" Margin="2,0,0,0"
+                           Grid.Row="0" Grid.Column="0"
+                           ></Label>
+                    <Label Text="To Date" Margin="2,0,0,0"
+                           Grid.Row="0" Grid.Column="1"
+                           ></Label>
+                    <DatePicker Grid.Column="0"
+                                Grid.Row="1"
+                                Date="{Binding FromDate,Mode=OneWayToSource}"
+                                Format="dd/MM/yyyy"
+                                x:Name="DateFrom">
+                        <DatePicker.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                              Command="{Binding ChangeDateCommand}">
+                            </behaviors:EventToCommandBehavior>
+                        </DatePicker.Behaviors>
+                    </DatePicker>
+                    <DatePicker Grid.Column="1"
+                                Grid.Row="1"
+                                Date="{Binding ToDate,Mode=OneWayToSource}"
+                                Format="dd/MM/yyyy"
+                                MinimumDate="{Binding Source={x:Reference DateFrom}}">
+                        <DatePicker.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="DateSelected"
+                                                      Command="{Binding ChangeDateCommand}">
+                            </behaviors:EventToCommandBehavior>
+                        </DatePicker.Behaviors>
+                    </DatePicker>
+                </Grid>
+                <!--Chart-->
+                <StackLayout Margin="5">
+                    <forms:ChartView Chart="{Binding ExpenditureChart}" IsVisible="{Binding IsExist}"
+                                     HeightRequest="200">
+                    </forms:ChartView>
+                </StackLayout>
+                <!--Expenditure List-->
+                <StackLayout Margin="10">
+                    <Label HorizontalOptions="Center"
+                           FontSize="Large"
+                           Text="Expenditure List"
+                           IsVisible="{Binding IsExist}"></Label>
+                </StackLayout>
+                <StackLayout Margin="5,5,5,0" >
+                    <ListView ItemsSource="{Binding ExpenditureList, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedExpenditure, Mode=OneWayToSource}"
+                              HasUnevenRows="True"
+                              IsVisible="{Binding IsExist}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                            <ColumnDefinition Width="2"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
+
+                                        </Grid.RowDefinitions>
+                                        <!--Icon for each Expenditure-->
+                                        <Image Grid.Column="0" 
+                                                   Grid.RowSpan="2"
+                                                   Grid.Row="0"
+                                                   Source="Icon.png"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"></Image>
+                                        <Label Grid.Column="2" Grid.Row="0"
+                                                   FontSize="Medium"
+                                                   FontAttributes="Bold"
+                                                   Text="{Binding TitleExpenditure}"></Label>
+                                        <Label Grid.Column="2" Grid.Row="1"
+                                                   FontSize="Medium"
+                                                   Text="{Binding Category}"
+                                                    ></Label>
+
+                                        <Label Grid.Column="3" Grid.Row="0"
+                                                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
+                                                   FontSize="Medium"
+                                                   TextColor="MediumVioletRed"
+                                                    ></Label>
+                                        <Label Grid.Column="3" Grid.Row="1"
+                                                   FontSize="Medium"
+                                                   Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"
+                                                   ></Label>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                              Command="{Binding SelectedExpenditureCommand}">
+                            </behaviors:EventToCommandBehavior>
+                        </ListView.Behaviors>
+                    </ListView>
+                    <StackLayout >
+                        <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="End">
+                            <Label Text="TOTAL: "
+                               FontAttributes="Bold"
+                               FontSize="Large"></Label>
+                            <Label Text="{Binding Total, Converter={StaticResource CovertToCurrency}}"
+                               TextColor="PaleVioletRed"
+                               FontAttributes="Bold"
+                               FontSize="Large"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

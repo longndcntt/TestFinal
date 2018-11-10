@@ -29,7 +29,21 @@ namespace TestFinal
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, LoginViewModel>();
+            containerRegistry.RegisterForNavigation<PrismPage, PrismPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReceiptPage, ReceiptPageViewModel>();
+            containerRegistry.RegisterForNavigation<ExpenditurePage, ExpenditurePageViewModel>();
+            containerRegistry.RegisterForNavigation<StatisticPage, StatisticPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddReceipt, AddReceiptViewModel>();
+            containerRegistry.RegisterForNavigation<EditReceipt, EditReceiptViewModel>();
+            containerRegistry.RegisterForNavigation<ReceiptDetail, ReceiptDetailViewModel>();
+            containerRegistry.RegisterForNavigation<StatisticReceipt, StatisticReceiptViewModel>();
+            containerRegistry.RegisterForNavigation<SignUp, SignUpViewModel>();
+            containerRegistry.RegisterForNavigation<Settingpage, SettingpageViewModel>();
+            containerRegistry.RegisterForNavigation<AddExpenditure, AddExpenditureViewModel>();
+            containerRegistry.RegisterForNavigation<EditExpenditure, EditExpenditureViewModel>();
+            containerRegistry.RegisterForNavigation<ExpenditureDetail, ExpenditureDetailViewModel>();
+            containerRegistry.RegisterForNavigation<StatisticExpenditure, StatisticExpenditureViewModel>();
         }
     }
 }

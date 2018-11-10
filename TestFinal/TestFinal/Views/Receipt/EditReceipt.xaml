@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:TestFinal.Behavior"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TestFinal.Views.EditReceipt"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView>
+        <!--Header-->
+        <StackLayout HorizontalOptions="Fill"
+                     VerticalOptions="Start">
+            <Grid BackgroundColor="Black" 
+                  HeightRequest="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Image="back.png"
+                        BackgroundColor="Black"
+                        Grid.Column="0"
+                        Margin="10"
+                        VerticalOptions="Center"
+                        Command="{Binding BackCommand}"
+                     ></Button>
+                <Label Text="Edit Receipt" 
+                   TextColor="ForestGreen"
+                   FontSize="Large" 
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   Grid.Column="1"
+                   ></Label>
+                <Button BackgroundColor="Black"
+                        TextColor="White"
+                        FontSize="Small" 
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Margin="0,0,5,0"
+                        Grid.Column="2"
+                        Text="Confirm"
+                        Command="{Binding ConfirmCommand}">
+                    
+                </Button>
+            </Grid>
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Margin="5">
+                <!--Body-->
+                <Image Source="{Binding ImagePath}" WidthRequest="100"
+                       HeightRequest="200"
+                       HorizontalOptions="Center"></Image>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!--Take picture button-->
+                    <Button Grid.Column="0"
+                    HorizontalOptions="EndAndExpand"
+                    Text="Take picture"></Button>
+                    <!--Pick picture button-->
+                    <Button Grid.Column="1"
+                    HorizontalOptions="Start"
+                    Text="Pick picture"></Button>
+                </Grid>
+                <!--Receipt Info-->
+                <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" Placeholder="Title"></Entry>
+                <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
+                SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
+                HorizontalOptions="Fill"/>
+                <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
+                    <Entry.Behaviors>
+                        <local:NumberValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <DatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                    Format="dd/MM/yyyy"></DatePicker>
+                <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

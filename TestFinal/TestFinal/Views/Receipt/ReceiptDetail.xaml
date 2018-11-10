@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TestFinal.Views.ReceiptDetail"
+             xmlns:converters="clr-namespace:TestFinal.Coverter"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout HorizontalOptions="Fill"
+                 VerticalOptions="Start">
+        <Grid BackgroundColor="Black" 
+              HeightRequest="80">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width='250'></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Image="back.png"
+                        BackgroundColor="Black"
+                        Grid.Column="0"
+                        Margin="10"
+                        VerticalOptions="Center"
+                        Command="{Binding BackCommand}"
+                     ></Button>
+            <Label Text="Receipt Detail" 
+                   TextColor="ForestGreen"
+                   FontSize="Large" 
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center"
+                   Grid.Column="1"
+                   ></Label>
+            <Button Text="Edit" 
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    FontSize="Small" 
+                    Grid.Column="2"
+                    VerticalOptions="Center"
+                    Command="{Binding EditCommand}">
+            </Button>
+        </Grid>
+        <StackLayout Margin="5" HorizontalOptions="Center" WidthRequest="300">
+            <Image Source="{Binding ImagePath}" WidthRequest="100"
+               HeightRequest="200"></Image>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" 
+                       FontAttributes="Bold"
+                       Text="Title: " ></Label>
+                <Label Grid.Column="1" Grid.Row="0" 
+                       FontAttributes="Bold"
+                       Text="{Binding TitleReceipt}" ></Label>
+
+                <Label Grid.Column="0" Grid.Row="1"
+                   Text="Kind: " ></Label>
+                <Label Grid.Column="1" Grid.Row="1"
+                   Text="Receipt" ></Label>
+
+                <Label Grid.Column="0" Grid.Row="2" 
+                   Text="Category: " ></Label>
+                <Label Grid.Column="1" Grid.Row="2" 
+                   Text="{Binding Category}" ></Label>
+
+                <Label Grid.Column="0" Grid.Row="3"
+                   Text="Amount Of Money: " ></Label>
+                <Label Grid.Column="1" Grid.Row="3"
+                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}" 
+                   TextColor="ForestGreen"></Label>
+
+                <Label Grid.Column="0" Grid.Row="4"
+                   Text="Date Of Receipt: " ></Label>
+                <Label Grid.Column="1" Grid.Row="4"
+                   Text="{Binding DateOfReceipt,StringFormat='{}{0:dd/MM/yyyy}'}" ></Label>
+
+                <Label Grid.Column="0" Grid.Row="5"
+                   Text="Note: " ></Label>
+                <Label Grid.Column="1" Grid.Row="5"
+                   Text="{Binding Note}" 
+                   TextColor="ForestGreen"></Label>
+            </Grid>
+            <Button Text="Delete" 
+                    FontSize="Medium" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Command="{Binding DeleteCommand}">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
