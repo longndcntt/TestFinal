@@ -9,48 +9,46 @@ using TestFinal.Model;
 
 namespace TestFinal.ViewModels
 {
-    public class EditExpenditureViewModel : ViewModelBase
+    public class EditReceiptViewModel : ViewModelBase
     {
         #region Properties
         INavigationService _navigationService;
         Database db;
         private string _title;
         private string _kind;
-        private List<string> _category;
         private string _amountOfMoneyString;
+        private List<string> _category;
         private string _selectedcategory;
         private double _amountOfMoney;
-        private DateTime _dateOfExpenditure;
+        private DateTime _dateOfReceipt;
         private string _note;
-        private Expenditure _selectedExpenditure;
+        private Receipt _selectedReceipt;
 
-        public string TitleExpenditure { get => _title; set { SetProperty(ref _title, value); } }
+        public string TitleReceipt { get => _title; set { SetProperty(ref _title, value); } }
         public string Kind { get => _kind; set { SetProperty(ref _kind, value); } }
-        public List<string> Category { get => _category; set { SetProperty(ref _category, value); } }
         public string AmountOfMoneyString { get => _amountOfMoneyString; set { SetProperty(ref _amountOfMoneyString, value); } }
+        public List<string> Category { get => _category; set { SetProperty(ref _category, value); } }
         public string SelectedCategory { get => _selectedcategory; set { SetProperty(ref _selectedcategory, value); } }
         public double AmountOfMoney { get => _amountOfMoney; set { SetProperty(ref _amountOfMoney, value); } }
-        public DateTime DateOfExpenditure
+        public DateTime DateOfReceipt
         {
-            get => _dateOfExpenditure; set
+            get => _dateOfReceipt; set
             {
-                SetProperty(ref _dateOfExpenditure, value);
-            }
-        }
+                SetProperty(ref _dateOfReceipt, value);  } }
         public string Note { get => _note; set { SetProperty(ref _note, value); } }
-        public Expenditure SelectedExpenditure
+        public Receipt SelectedReceipt
         {
-            get => _selectedExpenditure; set
+            get => _selectedReceipt; set
             {
-                SetProperty(ref _selectedExpenditure, value);
-                if (SelectedExpenditure != null)
+                SetProperty(ref _selectedReceipt, value);
+                if (SelectedReceipt != null)
                 {
-                    TitleExpenditure = SelectedExpenditure.TitleExpenditure;
-                    Kind = SelectedExpenditure.Kind;
-                    SelectedCategory = SelectedExpenditure.Category;
-                    AmountOfMoney = SelectedExpenditure.AmountOfMoney;
-                    DateOfExpenditure = SelectedExpenditure.DateOfExpenditure;
-                    Note = SelectedExpenditure.Note;
+                    TitleReceipt = SelectedReceipt.TitleReceipt;
+                    Kind = SelectedReceipt.Kind;
+                    SelectedCategory = SelectedReceipt.Category;
+                    AmountOfMoneyString = SelectedReceipt.AmountOfMoney.ToString();
+                    DateOfReceipt = SelectedReceipt.DateOfReceipt;
+                    Note = SelectedReceipt.Note;
                 }
             }
         }
@@ -63,13 +61,13 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public EditExpenditureViewModel(INavigationService navigationService) : base(navigationService)
+        public EditReceiptViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
             db = new Database();
             db.createDatabase();
             //String format cho datetime
-            String.Format("{0:dd/MM/yyyy}", DateOfExpenditure);
+            String.Format("{0:dd/MM/yyyy}", DateOfReceipt);
             LoadCategory();
             //Delegate Command
             ConfirmCommand = new DelegateCommand(CofirmToSaveChange);
@@ -84,38 +82,46 @@ namespace TestFinal.ViewModels
         {
             await _navigationService.GoBackAsync();
         }
+
         private async void CofirmToSaveChange()
         {
             if (db != null)
             {
-                Expenditure Expenditure = db.SearchExpenditureById(SelectedExpenditure.Id);
-                if (Expenditure != null && IsNumber(AmountOfMoneyString))
+                Receipt receipt = db.SearchReceiptById(SelectedReceipt.Id);
+                if (receipt != null && IsNumber(AmountOfMoneyString))
                 {
                     AmountOfMoney = double.Parse(AmountOfMoneyString);
-                    Expenditure.Category = SelectedCategory;
-                    Expenditure.AmountOfMoney = AmountOfMoney;
-                    Expenditure.DateOfExpenditure = DateOfExpenditure;
-                    Expenditure.TitleExpenditure = TitleExpenditure;
-                    Expenditure.Note = Note;
-
-                    if (db.UpdateExpenditure(Expenditure))
+                    if (AmountOfMoney >0)
                     {
-                        await App.Current.MainPage.DisplayAlert("Notify", "Update Successfully", "OK");
-                        await _navigationService.NavigateAsync("PrismPage");
+                        receipt.Category = SelectedCategory;
+                        receipt.AmountOfMoney = AmountOfMoney;
+                        receipt.DateOfReceipt = DateOfReceipt;
+                        receipt.TitleReceipt = TitleReceipt;
+                        receipt.Note = Note;
+                        if (db.UpdateReceipt(receipt))
+                        {
+                            await App.Current.MainPage.DisplayAlert("Notify", "Update Successfully", "OK");
+                            await _navigationService.NavigateAsync("PrismPage");
+                        }
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Notify", "Amount of money is not correct", "OK");
                     }
                 }
             }
         }
-        
         #endregion
 
         #region Method
+
+        //Get receipt detail
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.ContainsKey("EditExpenditure"))
+            if (parameters.ContainsKey("EditReceipt"))
             {
-                SelectedExpenditure = (Expenditure)parameters["EditExpenditure"];
+                SelectedReceipt = (Receipt)parameters["EditReceipt"];
             }
         }
 
@@ -123,12 +129,12 @@ namespace TestFinal.ViewModels
         {
             Category = new List<string>(new string[]
             {
-                "Ăn uống, nội trợ","Quà tặng","Tiệc tùng","Giải trí","Y tế","Du lịch",
-                "Mua sắm","Điện thoại","Phương tiện di chuyển","Gia dụng",
-                "Điện nước, tiền nhà","Học phí","Cho vay","Trả nợ","Các khoản khác"
-
+                "Tiền lương","Tiền thưởng","Trợ cấp","Quà tặng","Làm thêm",
+                "Kinh doanh","Bất động sản","Cổ phiếu","Nợ trả","Lãi suất",
+                "Vay nợ","Các khoản khác"
             });
         }
+
         public bool IsNumber(string pText)
         {
             Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");

@@ -14,9 +14,9 @@
     </ContentPage.Resources>
     <ScrollView>
         <StackLayout HorizontalOptions="Fill"
-                 VerticalOptions="Start">
+                     VerticalOptions="Start">
             <Grid BackgroundColor="Black" 
-              HeightRequest="80">
+                  HeightRequest="80">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width='250'></ColumnDefinition>
@@ -30,18 +30,18 @@
                         Command="{Binding BackCommand}"
                      ></Button>
                 <Label Text="Add Receipt" 
-                   TextColor="ForestGreen"
-                   FontSize="Large" 
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"
-                   Grid.Column="1"
+                       TextColor="ForestGreen"
+                       FontSize="Large" 
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Center"
+                       Grid.Column="1"
                    ></Label>
             </Grid>
             <StackLayout>
                 <!--Image-->
                 <Image Source="{Binding ImagePath}" WidthRequest="100"
-               HeightRequest="200"
-               HorizontalOptions="Center"></Image>
+                       HeightRequest="200"
+                       HorizontalOptions="Center"></Image>  
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -49,19 +49,20 @@
                     </Grid.ColumnDefinitions>
                     <!--Take picture button-->
                     <Button Grid.Column="0"
-                    HorizontalOptions="EndAndExpand"
-                    Text="Take picture"></Button>
+                            HorizontalOptions="EndAndExpand"
+                            Text="Take picture"></Button>
                     <!--Pick picture button-->
                     <Button Grid.Column="1"
-                    HorizontalOptions="Start"
-                    Text="Pick picture"></Button>
+                            HorizontalOptions="Start"
+                            Text="Pick picture"></Button>
                 </Grid>
                 <!--Receipt Info-->
                 <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" Placeholder="Title"></Entry>
                 <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
-                SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                HorizontalOptions="Fill"/>
-                <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
+                        SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
+                        HorizontalOptions="Fill"/>
+                <Entry Text="{Binding AmountOfMoneyString,Mode=OneWayToSource}" Placeholder="Amount of money"
+                       Keyboard="Numeric">
                     <Entry.Behaviors>
                         <local:NumberValidationBehavior />
                     </Entry.Behaviors>

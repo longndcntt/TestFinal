@@ -9,4 +9,5 @@
     <local:ReceiptPage></local:ReceiptPage>
     <local:ExpenditurePage></local:ExpenditurePage>
     <local:StatisticPage></local:StatisticPage>
+    <local:Settingpage></local:Settingpage>
 </TabbedPage>

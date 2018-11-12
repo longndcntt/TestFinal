@@ -14,7 +14,7 @@
                   HeightRequest="80">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="190"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Image="back.png"
@@ -65,18 +65,20 @@
                             Text="Pick picture"></Button>
                 </Grid>
                 <!--Expenditure Info-->
-                <Entry Text="{Binding TitleExpenditure,Mode=TwoWay}" Placeholder="Title"></Entry>
-                <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
-                SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                HorizontalOptions="Fill"/>
-                <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
-                    <Entry.Behaviors>
-                        <local:NumberValidationBehavior />
-                    </Entry.Behaviors>
-                </Entry>
-                <DatePicker Date="{Binding DateOfExpenditure, StringFormat='{}{0:dd/MM/yyyy}'}" 
-                    Format="dd/MM/yyyy"></DatePicker>
-                <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+                <StackLayout Margin="10,5,10,0">
+                    <Entry Text="{Binding TitleExpenditure,Mode=TwoWay}" Placeholder="Title"></Entry>
+                    <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
+                            HorizontalOptions="Fill"/>
+                    <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
+                        <Entry.Behaviors>
+                            <local:NumberValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <DatePicker Date="{Binding DateOfExpenditure, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
+                                Format="dd/MM/yyyy"></DatePicker>
+                    <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ScrollView>

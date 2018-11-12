@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Plugin.Multilingual;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using TestFinal.Resources;
 using Xamarin.Forms;
 
 namespace TestFinal.Coverter
@@ -12,10 +14,24 @@ namespace TestFinal.Coverter
         {
             if (value != null)
             {
-                value = string.Format("{0:C2}", value) + " VND";
-                string s = value.ToString();
+                CultureInfo TempCulture = new CultureInfo("en-US");
+                if (CrossMultilingual.Current.DeviceCultureInfo.ToString().Equals(TempCulture.ToString()))
+                {
+                    value = double.Parse(value.ToString());
+                    value = (double)value/22000;
+                    value = string.Format("{0:C2}", value);
+                    string s = value.ToString();
+
+                    return s;
+                }
+                else
+                {
+                    value = string.Format("{0:C}", value);
+                    string s = value.ToString();
+                    return s;
+                }
+                   
                 
-                return s.Substring(1);
             }
             return null;
            

@@ -3,22 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TestFinal.Views.Settingpage">
+             x:Class="TestFinal.Views.Settingpage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
     <StackLayout Margin="10">
         <Label Text="Choose the currency">
             
         </Label>
         <Picker ItemsSource="{Binding Currency}"
                 ItemDisplayBinding="{Binding DisplayName}"
-                SelectedItem="{Binding  SelectedCurrency}">
+                SelectedItem="{Binding  SelectedCurrency}"
+                >
+            <Picker.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                  Command="SelectedCurrencyChangedCommand"></behaviors:EventToCommandBehavior>
+            </Picker.Behaviors>
         </Picker>
 
         <Label Text="Choose the language">
 
         </Label>
-        <Picker ItemsSource="{Binding Language}"
+        <Picker ItemsSource="{Binding Languages}"
                 ItemDisplayBinding="{Binding DisplayName}"
-                SelectedItem="{Binding  SelectedLanguage}">
+                SelectedItem="{Binding  SelectedLanguage}"
+                >
+           
+            <Picker.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                  Command="{Binding SelectedLanguageChangedCommand}"></behaviors:EventToCommandBehavior>
+            </Picker.Behaviors>
         </Picker>
     </StackLayout>
 </ContentPage>

@@ -21,7 +21,6 @@ namespace TestFinal.ViewModels
         private string _amountOfMoneyString;
         private DateTime _dateOfExpenditure;
         private string _note;
-
         private List<string> _category;
 
         public string TitleExpenditure { get => _title; set { SetProperty(ref _title, value); } }
@@ -29,7 +28,6 @@ namespace TestFinal.ViewModels
         public string SelectedCategory { get => _selectedcategory; set { SetProperty(ref _selectedcategory, value); } }
         public double AmountOfMoney { get => _amountOfMoney; set { SetProperty(ref _amountOfMoney, value); } }
         public string AmountOfMoneyString { get => _amountOfMoneyString; set { SetProperty(ref _amountOfMoneyString, value); } }
-
         public DateTime DateOfExpenditure { get => _dateOfExpenditure; set { SetProperty(ref _dateOfExpenditure, value); } }
         public string Note { get => _note; set { SetProperty(ref _note, value); } }
         public List<string> Category { get => _category; set { SetProperty(ref _category, value); } }
@@ -107,7 +105,7 @@ namespace TestFinal.ViewModels
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Notify", "You haven't entered amount of money yet!", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Notify", "Amount of money is not correct", "Ok");
                 }
             }
             else

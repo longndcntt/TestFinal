@@ -84,22 +84,29 @@ namespace TestFinal.ViewModels
 
         private async void AddReceipt()
         {
-            if(AmountOfMoney > 0 && SelectedCategory != null && TitleReceipt!=null && IsNumber(AmountOfMoneyString))
+            if(SelectedCategory != null && TitleReceipt!=null && IsNumber(AmountOfMoneyString))
             {
                 AmountOfMoney = double.Parse(AmountOfMoneyString);
-                Receipt receipt = new Receipt()
+                if (AmountOfMoney > 0)
                 {
-                    TitleReceipt = TitleReceipt,
-                    Kind = "Receipt",
-                    Category = SelectedCategory,
-                    AmountOfMoney = AmountOfMoney,
-                    DateOfReceipt = DateOfReceipt,
-                    Note = Note
-                };
-                if (db.InsertReceipt(receipt))
+                    Receipt receipt = new Receipt()
+                    {
+                        TitleReceipt = TitleReceipt,
+                        Kind = "Receipt",
+                        Category = SelectedCategory,
+                        AmountOfMoney = AmountOfMoney,
+                        DateOfReceipt = DateOfReceipt,
+                        Note = Note
+                    };
+                    if (db.InsertReceipt(receipt))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Notify", "Add successfully receipt", "Ok");
+                        await _navigationService.NavigateAsync("PrismPage");
+                    }
+                }
+                else
                 {
-                    await App.Current.MainPage.DisplayAlert("Notify", "Add successfully receipt", "Ok");
-                    await _navigationService.NavigateAsync("PrismPage");
+                    await App.Current.MainPage.DisplayAlert("Notify", "Amount of money is not correct", "Ok");
                 }
             }
             else

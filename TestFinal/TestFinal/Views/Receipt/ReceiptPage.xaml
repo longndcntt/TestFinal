@@ -6,6 +6,7 @@
              x:Class="TestFinal.Views.ReceiptPage"
              xmlns:converters="clr-namespace:TestFinal.Coverter"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:translate ="clr-namespace:TestFinal.Helpers"
              Title="Receipt"
              Icon="Receipts.png">
     <ContentPage.Resources>
@@ -34,22 +35,25 @@
             <StackLayout HorizontalOptions="Fill"
                              Orientation="Vertical"
                              VerticalOptions="FillAndExpand">
-                    <!-- Search -->
-                    <Entry Placeholder="Search" Text="{Binding SearchContent}"
+                <Label Text="{translate:Translate ACCOUNTANT}"
+                       HorizontalOptions="Center"></Label>
+                <!-- Search -->
+
+                <Entry Placeholder="Search" Text="{Binding SearchContent}"
                            HorizontalOptions="Center"
                            WidthRequest="200">
-                        <Entry.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="TextChanged"
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="TextChanged"
                                                           Command="{Binding TextChangedSearchCommand}">
-                            </behaviors:EventToCommandBehavior>
-                        </Entry.Behaviors>
-                    </Entry>
-                    <!--Sort and statistic-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                        </behaviors:EventToCommandBehavior>
+                    </Entry.Behaviors>
+                </Entry>
+                <!--Sort and statistic-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Margin="10,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -79,67 +83,67 @@
                             FontSize="18"
                             VerticalOptions="Center"
                             HorizontalOptions="End" Margin="0,0,20,0"></Button>
-                    </Grid>
-                    <!--Show receipt list-->
-                    <Grid VerticalOptions="FillAndExpand" Margin="10,0,5,0">
-                        <ListView ItemsSource="{Binding ReceiptList, Mode=TwoWay}"
+                </Grid>
+                <!--Show receipt list-->
+                <Grid VerticalOptions="FillAndExpand" Margin="10,0,5,0">
+                    <ListView ItemsSource="{Binding ReceiptList, Mode=TwoWay}"
                                   
                                   SelectedItem="{Binding SelectedReceipt, Mode=OneWayToSource}"
                                   HasUnevenRows="True">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell >
-                                        <StackLayout Margin="0,2,0,0">
-                                            <Grid >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                                    <ColumnDefinition Width="2"></ColumnDefinition>
-                                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="30"></RowDefinition>
-                                                    <RowDefinition Height="30"></RowDefinition>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <StackLayout Margin="0,2,0,0">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                                <ColumnDefinition Width="2"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
 
-                                                </Grid.RowDefinitions>
-                                                <!--Icon for each receipt-->
-                                                <Image Grid.Column="0" 
+                                            </Grid.RowDefinitions>
+                                            <!--Icon for each receipt-->
+                                            <Image Grid.Column="0" 
                                                        Grid.RowSpan="2"
                                                        Grid.Row="0"
                                                        Source="Icon.png"
                                                        HorizontalOptions="Center"
                                                        VerticalOptions="Center"></Image>
-                                                <Label Grid.Column="2" Grid.Row="0"
+                                            <Label Grid.Column="2" Grid.Row="0"
                                                        FontSize="Medium"
                                                        FontAttributes="Bold"
                                                        Text="{Binding TitleReceipt}"
                                                     ></Label>
-                                                <Label Grid.Column="2" Grid.Row="1"
+                                            <Label Grid.Column="2" Grid.Row="1"
                                                        FontSize="Medium"
                                                        Text="{Binding Category}"
                                                     ></Label>
 
-                                                <Label Grid.Column="3" Grid.Row="0"
+                                            <Label Grid.Column="3" Grid.Row="0"
                                                    Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
                                                    FontSize="Medium"
                                                    TextColor="ForestGreen"
                                                     ></Label>
-                                                <Label Grid.Column="3" Grid.Row="1"
+                                            <Label Grid.Column="3" Grid.Row="1"
                                                    FontSize="Medium"
                                                    Text="{Binding DateOfReceipt,StringFormat='{}{0:dd/MM/yyyy}'}"
                                                    ></Label>
-                                            </Grid>
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <ListView.Behaviors>
-                                <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemTapped"
                                                                   Command="{Binding SelectedReceiptCommand}">
-                                </behaviors:EventToCommandBehavior>
-                            </ListView.Behaviors>
-                        </ListView>
-                        <Button BorderRadius="50" 
+                            </behaviors:EventToCommandBehavior>
+                        </ListView.Behaviors>
+                    </ListView>
+                    <Button BorderRadius="50" 
                                 HorizontalOptions="End"
                                 VerticalOptions="End"
                                 Margin="0,0,15,40"
@@ -148,10 +152,10 @@
                                 FontSize="25" 
                                 Text="+"
                                 Command="{Binding AddReceiptCommand}"></Button>
-                    </Grid>
-               
+                </Grid>
+
             </StackLayout>
-                <!--Button add-->
+            <!--Button add-->
             </StackLayout>
     </ScrollView>
 </ContentPage>
