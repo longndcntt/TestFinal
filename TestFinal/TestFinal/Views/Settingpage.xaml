@@ -6,7 +6,8 @@
              x:Class="TestFinal.Views.Settingpage"
              NavigationPage.HasNavigationBar="False"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             Title="Setting">
+             Title="Setting"
+             Icon="SettingIcon.png">
     <StackLayout Margin="10">
         <Label Text="Choose the currency">
             
