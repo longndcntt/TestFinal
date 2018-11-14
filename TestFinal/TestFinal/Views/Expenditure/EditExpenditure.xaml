@@ -40,7 +40,6 @@
                         Grid.Column="2"
                         Text="Confirm"
                         Command="{Binding ConfirmCommand}">
-
                 </Button>
             </Grid>
             <StackLayout HorizontalOptions="Center"

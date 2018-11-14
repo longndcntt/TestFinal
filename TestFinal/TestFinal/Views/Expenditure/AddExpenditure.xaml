@@ -78,17 +78,18 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
-                    HorizontalOptions="Center"
-                    Text="Add"
-                    Command="{Binding AddExpenditureCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Add"
+                            Command="{Binding AddExpenditureCommand}">
+                    </Button>
                     <Button Grid.Column="1"
-                    HorizontalOptions="Center"
-                    Text="Clear"
-                    Command="{Binding ClearCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Clear"
+                            Command="{Binding ClearCommand}"></Button>
                     <Button Grid.Column="2"
-                    HorizontalOptions="Center"
-                    Text="Cancel"
-                    Command="{Binding CancelCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Cancel"
+                            Command="{Binding CancelCommand}"></Button>
                 </Grid>
             </StackLayout>
         </StackLayout>

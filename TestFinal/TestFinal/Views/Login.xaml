@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestFinal.Views.MainPage"
              NavigationPage.HasNavigationBar="False"
-             xmlns:translate="clr-namespace:TestFinal.Helpers">
+             xmlns:translate="clr-namespace:TestFinal.Helpers"
+             xmlns:eventtrigger="clr-namespace:TestFinal.Trigger">
     <ContentPage.Resources>
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="5,10,5,10"></Setter>
@@ -28,21 +29,36 @@
                    HorizontalOptions="Center"></Image>
             <!--Username and Password-->
             <Entry Placeholder="Username"
-               Text="{Binding Username}"></Entry>
+                   Text="{Binding Username,Mode=OneWayToSource}"
+                   x:Name="entUsername"></Entry>
             <Entry Placeholder="Password"
-               Text="{Binding Password}"
-               IsPassword="True"></Entry>
+                   Text="{Binding Password,Mode=OneWayToSource}"
+                   x:Name="entPassword"
+                   IsPassword="True"></Entry>
             
             <Button Text="LOG IN" Command="{Binding LoginCommand}"
-                BackgroundColor="#48525e"></Button>
-            
+                    BackgroundColor="#48525e">
+                <Button.Triggers>
+                    <MultiTrigger TargetType="Button">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference entUsername},Path=Text.Length}"
+                                              Value="0"></BindingCondition>
+                            <BindingCondition Binding="{Binding Source={x:Reference entPassword},Path=Text.Length}"
+                                              Value="0"></BindingCondition>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="False"></Setter>
+                    </MultiTrigger>
+                    <EventTrigger Event="Clicked">
+                        <eventtrigger:ButtonEventTrigger></eventtrigger:ButtonEventTrigger>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
             <Label Text="OR" 
                    FontSize="12" 
                    TextColor="DimGray"
                    HorizontalOptions="Center"></Label>
-            
             <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
-                BackgroundColor="#48525e"></Button>
+                    BackgroundColor="#48525e"></Button>
         </StackLayout>
     </StackLayout>
     

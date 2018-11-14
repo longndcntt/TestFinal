@@ -57,19 +57,24 @@
                             Text="Pick picture"></Button>
                 </Grid>
                 <!--Receipt Info-->
-                <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" Placeholder="Title"></Entry>
+                <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" 
+                      x:Name="entTitle"></Entry>
                 <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
                         SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                        HorizontalOptions="Fill"/>
+                        HorizontalOptions="Fill"
+                        x:Name="pckCategory"/>
                 <Entry Text="{Binding AmountOfMoneyString,Mode=OneWayToSource}" Placeholder="Amount of money"
-                       Keyboard="Numeric">
+                       Keyboard="Numeric"
+                       x:Name="entMoney">
                     <Entry.Behaviors>
                         <local:NumberValidationBehavior />
                     </Entry.Behaviors>
                 </Entry>
                 <DatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
-                    Format="dd/MM/yyyy"></DatePicker>
-                <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+                            Format="dd/MM/yyyy"></DatePicker>
+                <Entry Text="{Binding Note,Mode=TwoWay}" 
+                       Placeholder="Note"
+                       x:Name="entNote"></Entry>
                 <Grid Margin="20,5,20,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -77,17 +82,18 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
-                    HorizontalOptions="Center"
-                    Text="Add"
-                    Command="{Binding AddReceiptCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Add"
+                            Command="{Binding AddReceiptCommand}">
+                    </Button>
                     <Button Grid.Column="1"
-                    HorizontalOptions="Center"
-                    Text="Clear"
-                    Command="{Binding ClearCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Clear"
+                            Command="{Binding ClearCommand}"></Button>
                     <Button Grid.Column="2"
-                    HorizontalOptions="Center"
-                    Text="Cancel"
-                    Command="{Binding CancelCommand}"></Button>
+                            HorizontalOptions="Center"
+                            Text="Cancel"
+                            Command="{Binding CancelCommand}"></Button>
                 </Grid>
             </StackLayout>
         </StackLayout>
