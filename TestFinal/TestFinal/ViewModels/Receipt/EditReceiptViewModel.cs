@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TestFinal.Enums;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -119,9 +120,9 @@ namespace TestFinal.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.ContainsKey("EditReceipt"))
+            if (parameters.ContainsKey(ParamKey.EditReceipt.ToString()))
             {
-                SelectedReceipt = (Receipt)parameters["EditReceipt"];
+                SelectedReceipt = (Receipt)parameters[ParamKey.EditReceipt.ToString()];
             }
         }
 

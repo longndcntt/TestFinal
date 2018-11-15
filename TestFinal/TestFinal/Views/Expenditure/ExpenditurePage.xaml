@@ -4,16 +4,10 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.ExpenditurePage"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              Title="Expenditure"
              Icon="Expenditures.png"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ScrollView>
         <!--Header-->
         <StackLayout HorizontalOptions="Start">
@@ -99,18 +93,18 @@
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center"/>
                                             <Label Grid.Column="2" Grid.Row="0"
-                                                   FontSize="Medium"
+                                                   Style="{Binding lblListViewItem}"
                                                    FontAttributes="Bold"
                                                    Text="{Binding TitleExpenditure}"/>
                                             <Label Grid.Column="2" Grid.Row="1"
-                                                       FontSize="Medium"
-                                                       Text="{Binding Category}"/>
+                                                   Style="{Binding lblListViewItem}"   
+                                                   Text="{Binding Category}"/>
                                             <Label Grid.Column="3" Grid.Row="0"
                                                    Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
-                                                   FontSize="Medium"
+                                                   Style="{Binding lblListViewItem}"
                                                    TextColor="{StaticResource txtExpenditureMoneyColor}"/>
                                             <Label Grid.Column="3" Grid.Row="1"
-                                                   FontSize="Medium"
+                                                   Style="{Binding lblListViewItem}"
                                                    Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"/>
                                         </Grid>
                                     </StackLayout>

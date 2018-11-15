@@ -4,16 +4,9 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.ReceiptPage"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:translate ="clr-namespace:TestFinal.Helpers"
              Title="Receipt"
              Icon="Receipts.png">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ScrollView>
             <!--Header-->
             <StackLayout HorizontalOptions="Start">
@@ -33,13 +26,11 @@
             <StackLayout HorizontalOptions="Fill"
                              Orientation="Vertical"
                              VerticalOptions="FillAndExpand">
-                <Label Text="{translate:Translate ACCOUNTANT}"
-                       HorizontalOptions="Center"></Label>
                 <!-- Search -->
-
-                <Entry Placeholder="Search" Text="{Binding SearchContent}"
-                           HorizontalOptions="Center"
-                           WidthRequest="200">
+                <Entry Placeholder="Search" 
+                       Text="{Binding SearchContent}"
+                       HorizontalOptions="Center"
+                       WidthRequest="200">
                     <Entry.Behaviors>
                         <behaviors:EventToCommandBehavior EventName="TextChanged"
                                                           Command="{Binding TextChangedSearchCommand}">

@@ -2,13 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.ExpenditureDetail"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
@@ -84,8 +82,7 @@
                 <Label Grid.Column="0" Grid.Row="5"
                         Text="Note: " ></Label>
                 <Label Grid.Column="1" Grid.Row="5"
-                        Text="{Binding Note}" 
-                        TextColor="ForestGreen"></Label>
+                        Text="{Binding Note}" />
             </Grid>
             <Button Text="Delete" 
                     FontSize="Medium" 

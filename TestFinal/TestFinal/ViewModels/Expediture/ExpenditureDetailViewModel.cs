@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TestFinal.Enums;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -80,8 +81,8 @@ namespace TestFinal.ViewModels
             if (SelectedExpenditure != null)
             {
                 var parameters = new NavigationParameters();
-                parameters.Add("EditExpenditure", SelectedExpenditure);
-                await _navigationService.NavigateAsync("EditExpenditure", parameters);
+                parameters.Add(ParamKey.EditExpenditure.ToString(), SelectedExpenditure);
+                await _navigationService.NavigateAsync(ParamKey.EditExpenditure.ToString(), parameters);
             }
         }
 
@@ -107,9 +108,9 @@ namespace TestFinal.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.ContainsKey("ExpenditureDetail"))
+            if (parameters.ContainsKey(ParamKey.ExpenditureDetail.ToString()))
             {
-                SelectedExpenditure = (Expenditure)parameters["ExpenditureDetail"];
+                SelectedExpenditure = (Expenditure)parameters[ParamKey.ExpenditureDetail.ToString()];
             }
         }
 

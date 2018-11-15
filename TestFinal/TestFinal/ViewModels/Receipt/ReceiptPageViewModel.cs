@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TestFinal.Enums;
 using TestFinal.Model;
 using Xamarin.Forms;
 
@@ -113,8 +114,8 @@ namespace TestFinal.ViewModels
             if (SelectedReceipt != null)
             {
                 var parameters = new NavigationParameters();
-                parameters.Add("ReceiptDetail", SelectedReceipt);
-                await _navigationService.NavigateAsync("ReceiptDetail", parameters);
+                parameters.Add(ParamKey.ReceiptDetail.ToString(), SelectedReceipt);
+                await _navigationService.NavigateAsync(ParamKey.ReceiptDetail.ToString(), parameters);
             }
         }
 

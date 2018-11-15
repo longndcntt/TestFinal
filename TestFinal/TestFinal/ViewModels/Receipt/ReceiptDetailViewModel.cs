@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TestFinal.Enums;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -75,8 +76,8 @@ namespace TestFinal.ViewModels
             if (SelectedReceipt != null)
             {
                 var parameters = new NavigationParameters();
-                parameters.Add("EditReceipt", SelectedReceipt);
-                await _navigationService.NavigateAsync("EditReceipt", parameters);
+                parameters.Add(ParamKey.EditReceipt.ToString(), SelectedReceipt);
+                await _navigationService.NavigateAsync(ParamKey.EditReceipt.ToString(), parameters);
             }
         }
 
@@ -102,9 +103,9 @@ namespace TestFinal.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.ContainsKey("ReceiptDetail"))
+            if (parameters.ContainsKey(ParamKey.ReceiptDetail.ToString()))
             {
-                SelectedReceipt = (Receipt)parameters["ReceiptDetail"];
+                SelectedReceipt = (Receipt)parameters[ParamKey.ReceiptDetail.ToString()];
             }
         }
         #endregion

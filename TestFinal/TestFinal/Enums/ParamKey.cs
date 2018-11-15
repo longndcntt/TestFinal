@@ -6,6 +6,6 @@ namespace TestFinal.Enums
 {
     public enum ParamKey
     {
-        EditExpenditure,
+        EditExpenditure, ReceiptDetail, EditReceipt, ExpenditureDetail
     }
 }

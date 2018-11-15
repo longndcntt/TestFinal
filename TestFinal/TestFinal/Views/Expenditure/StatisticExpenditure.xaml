@@ -3,16 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.StatisticExpenditure"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+   
     <ScrollView>
         <StackLayout HorizontalOptions="Fill"
                      VerticalOptions="Fill">
@@ -107,29 +102,25 @@
                                         </Grid.RowDefinitions>
                                         <!--Icon for each Expenditure-->
                                         <Image Grid.Column="0" 
-                                                   Grid.RowSpan="2"
-                                                   Grid.Row="0"
-                                                   Source="Icon.png"
-                                                   HorizontalOptions="Center"
-                                                   VerticalOptions="Center"></Image>
+                                               Grid.RowSpan="2"
+                                               Grid.Row="0"
+                                               Source="Icon.png"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
                                         <Label Grid.Column="2" Grid.Row="0"
-                                                   FontSize="Medium"
-                                                   FontAttributes="Bold"
-                                                   Text="{Binding TitleExpenditure}"></Label>
+                                               Style="{Binding lblListViewItem}"
+                                               FontAttributes="Bold"
+                                               Text="{Binding TitleExpenditure}"/>
                                         <Label Grid.Column="2" Grid.Row="1"
-                                                   FontSize="Medium"
-                                                   Text="{Binding Category}"
-                                                    ></Label>
-
+                                               Style="{Binding lblListViewItem}"
+                                               Text="{Binding Category}"/>
                                         <Label Grid.Column="3" Grid.Row="0"
-                                                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
-                                                   FontSize="Medium"
-                                                   TextColor="{StaticResource txtExpenditureMoneyColor}"
-                                                    ></Label>
+                                               Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
+                                               Style="{Binding lblListViewItem}"
+                                               TextColor="{StaticResource txtExpenditureMoneyColor}"/>
                                         <Label Grid.Column="3" Grid.Row="1"
-                                                   FontSize="Medium"
-                                                   Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"
-                                                   ></Label>
+                                               Style="{Binding lblListViewItem}"
+                                               Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"/>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

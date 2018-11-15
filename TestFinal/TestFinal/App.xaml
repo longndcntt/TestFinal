@@ -2,9 +2,11 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
-             x:Class="TestFinal.App">
+                        xmlns:converters="clr-namespace:TestFinal.Coverter"
+                        x:Class="TestFinal.App">
 	<Application.Resources>
 		<!-- Application resource dictionary -->
+        <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
         <ResourceDictionary>
             <Color x:Key="HeaderBackground">Black</Color>
             <!-- Expenditure text color-->
@@ -47,6 +49,7 @@
 
             <Style x:Key="lblListViewItem" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"></Setter>
             </Style>
             
             <!--Button add-->

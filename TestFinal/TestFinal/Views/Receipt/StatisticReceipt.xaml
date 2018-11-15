@@ -6,13 +6,7 @@
              x:Class="TestFinal.Views.StatisticReceipt"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ScrollView>
         <StackLayout HorizontalOptions="Fill"
                      VerticalOptions="Fill">
@@ -24,15 +18,13 @@
                     <ColumnDefinition Width='250'></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Image="back.png"
-                        BackgroundColor="Black"
+                <Button Style="{StaticResource btnBack}"
                         Grid.Column="0"
-                        Margin="10"
-                        VerticalOptions="Center"
                         Command="{Binding BackCommand}"
                      ></Button>
                 <Label Text="Statistic" 
                        Style="{StaticResource txtReceiptHeaderStyle}"
+                       TextColor="White"
                        Grid.Column="1"
                    ></Label>
             </Grid>
@@ -116,23 +108,19 @@
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center"></Image>
                                         <Label Grid.Column="2" Grid.Row="0"
-                                                   FontSize="Medium"
-                                                   FontAttributes="Bold"
-                                                   Text="{Binding TitleReceipt}"></Label>
+                                               Style="{StaticResource lblListViewItem}"
+                                               FontAttributes="Bold"
+                                               Text="{Binding TitleReceipt}"/>
                                         <Label Grid.Column="2" Grid.Row="1"
-                                                   FontSize="Medium"
-                                                   Text="{Binding Category}"
-                                                    ></Label>
-
+                                               Style="{StaticResource lblListViewItem}"
+                                               Text="{Binding Category}"/>
                                         <Label Grid.Column="3" Grid.Row="0"
-                                                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
-                                                   FontSize="Medium"
-                                                   TextColor="ForestGreen"
-                                                    ></Label>
+                                               Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
+                                               Style="{StaticResource lblListViewItem}"
+                                               TextColor="ForestGreen"/>
                                         <Label Grid.Column="3" Grid.Row="1"
-                                                   FontSize="Medium"
-                                                   Text="{Binding DateOfReceipt,StringFormat='{}{0:dd/MM/yyyy}'}"
-                                                   ></Label>
+                                               Style="{StaticResource lblListViewItem}"
+                                               Text="{Binding DateOfReceipt,StringFormat='{}{0:dd/MM/yyyy}'}"/>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

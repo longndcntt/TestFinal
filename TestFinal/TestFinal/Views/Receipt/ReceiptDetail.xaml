@@ -4,12 +4,10 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.ReceiptDetail"
-             xmlns:converters="clr-namespace:TestFinal.Coverter"
              NavigationPage.HasNavigationBar="False"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
@@ -86,8 +84,7 @@
                 <Label Grid.Column="0" Grid.Row="5"
                    Text="Note: " ></Label>
                 <Label Grid.Column="1" Grid.Row="5"
-                   Text="{Binding Note}" 
-                   TextColor="ForestGreen"></Label>
+                   Text="{Binding Note}" />
             </Grid>
             <Button Text="Delete" 
                     FontSize="Medium" 

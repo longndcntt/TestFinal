@@ -127,7 +127,7 @@ namespace TestFinal.ViewModels
                     {
                          Label = "Receipt",
                         ValueLabel = DoubleToCurrency(TotalReceipt),
-                        Color = SKColor.Parse("#21FF94")
+                        Color = SKColor.Parse("#005900")
                     },
                     new Entry((float)TotalExpenditure)
                     {

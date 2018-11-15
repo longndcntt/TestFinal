@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TestFinal.Enums;
 using TestFinal.Helpers;
 using TestFinal.Model;
 
@@ -109,8 +110,8 @@ namespace TestFinal.ViewModels
             if (SelectedExpenditure != null)
             {
                 var parameters = new NavigationParameters();
-                parameters.Add("ExpenditureDetail", SelectedExpenditure);
-                await _navigationService.NavigateAsync("ExpenditureDetail", parameters);
+                parameters.Add(ParamKey.ExpenditureDetail.ToString(), SelectedExpenditure);
+                await _navigationService.NavigateAsync(ParamKey.ExpenditureDetail.ToString(), parameters);
             }
         }
 
