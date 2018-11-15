@@ -195,73 +195,73 @@ namespace TestFinal.ViewModels
                     new Entry((float)salary)
                 {
                     Label = "Tiền lương",
-                    ValueLabel = salary.ToString(),
+                    ValueLabel =  DoubleToCurrency(salary),
                     Color = SKColor.Parse("#39241e")
                 },
                 new Entry((float)bonus)
                 {
                     Label = "Tiền thưởng",
-                    ValueLabel = bonus.ToString(),
+                    ValueLabel =  DoubleToCurrency(bonus),
                     Color = SKColor.Parse("#1d8b24")
                 },
                 new Entry((float)subsidy)
                 {
                      Label = "Tiền trợ cấp",
-                     ValueLabel = subsidy.ToString(),
+                     ValueLabel =  DoubleToCurrency(subsidy),
                      Color = SKColor.Parse("#809c79")
                 },
                 new Entry((float)gift)
                 {
                      Label = "Quà tặng",
-                     ValueLabel = gift.ToString(),
+                     ValueLabel =  DoubleToCurrency(gift),
                      Color = SKColor.Parse("#3ec797")
                 },
                     new Entry((float)part_time)
                 {
                     Label = "Làm thêm",
-                    ValueLabel = part_time.ToString(),
+                    ValueLabel =  DoubleToCurrency(part_time),
                     Color = SKColor.Parse("#86825a")
                 },
                      new Entry((float)business)
                 {
                     Label = "Kinh doanh",
-                    ValueLabel = business.ToString(),
+                    ValueLabel =  DoubleToCurrency(business),
                     Color = SKColor.Parse("#947565")
                 },
                       new Entry((float)real_estimate)
                 {
                     Label = "Bất động sản",
-                    ValueLabel = real_estimate.ToString(),
+                    ValueLabel =  DoubleToCurrency(real_estimate),
                     Color = SKColor.Parse("#a0db8e")
                 },
                        new Entry((float)stock)
                 {
                     Label = "Cổ phiếu",
-                    ValueLabel = stock.ToString(),
+                    ValueLabel =  DoubleToCurrency(stock),
                     Color = SKColor.Parse("#9dd7b4")
                 },
                         new Entry((float)acquittancce)
                 {
                     Label = "Trả nợ",
-                    ValueLabel = acquittancce.ToString(),
+                    ValueLabel =  DoubleToCurrency(acquittancce),
                     Color = SKColor.Parse("#ffa500")
                 },
                          new Entry((float)interest_rate)
                 {
                     Label = "Tiền lãi",
-                    ValueLabel = interest_rate.ToString(),
+                    ValueLabel = DoubleToCurrency(interest_rate),
                     Color = SKColor.Parse("#000080")
                 },
                           new Entry((float)loan)
                 {
                     Label = "Vay nợ",
-                    ValueLabel = loan.ToString(),
+                    ValueLabel = DoubleToCurrency(loan),
                     Color = SKColor.Parse("#b6fcd5")
                 },
                            new Entry((float)another)
                 {
                     Label = "Các khoản khác",
-                    ValueLabel = another.ToString(),
+                    ValueLabel = DoubleToCurrency(another),
                     Color = SKColor.Parse("#eadcce")
                 },
                 };
@@ -275,6 +275,12 @@ namespace TestFinal.ViewModels
             {
                 IsExist = false;
             }
+        }
+        public string DoubleToCurrency(double c)
+        {
+            c = c / 22000;
+            string s = string.Format("{0:C2}", c);
+            return s;
         }
         #endregion
 

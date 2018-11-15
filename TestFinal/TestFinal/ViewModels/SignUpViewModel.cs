@@ -77,7 +77,7 @@ namespace TestFinal.ViewModels
                 if (db.InsertUser(us))
                 {
                     await App.Current.MainPage.DisplayAlert("Notify", "Sign Up successfully", "Ok");
-                    await _navigationService.NavigateAsync("Login");
+                    await _navigationService.GoBackToRootAsync();
                 }
 
             }

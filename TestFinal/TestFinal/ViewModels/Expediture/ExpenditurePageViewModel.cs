@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TestFinal.Helpers;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -142,7 +143,7 @@ namespace TestFinal.ViewModels
         //Hàm chuyển đến trang AddExpenditure
         private async void AddExpenditure()
         {
-            await _navigationService.NavigateAsync("AddExpenditure");
+            await _navigationService.NavigateAsync(PageManager.AddExpenditure);
         }
 
         #endregion

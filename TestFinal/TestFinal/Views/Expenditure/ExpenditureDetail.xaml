@@ -23,18 +23,12 @@
                 <ColumnDefinition Width='250'></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Image="back.png"
-                        BackgroundColor="Black"
-                        Grid.Column="0"
-                        Margin="10"
-                        VerticalOptions="Center"
-                        Command="{Binding BackCommand}"></Button>
+            <Button Style="{StaticResource btnBack}"
+                    Grid.Column="0"
+                    Command="{Binding BackCommand}"></Button>
             <Label Text="Expenditure Detail" 
-                   TextColor="ForestGreen"
-                   FontSize="Large" 
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"
-                   Grid.Column="1" ></Label>
+                   Style="{StaticResource txtExpenditureHeaderStyle}"
+                   Grid.Column="1"></Label>
             <Button Text="Edit" 
                     TextColor="White"
                     BackgroundColor="Black"
@@ -68,31 +62,30 @@
                        Text="{Binding TitleExpenditure}" ></Label>
 
                 <Label Grid.Column="0" Grid.Row="1"
-                   Text="Kind: " ></Label>
+                       Text="Kind: " ></Label>
                 <Label Grid.Column="1" Grid.Row="1"
-                   Text="Expenditure" ></Label>
-
+                       Text="Expenditure" ></Label>
                 <Label Grid.Column="0" Grid.Row="2" 
-                   Text="Category: " ></Label>
+                       Text="Category: " ></Label>
                 <Label Grid.Column="1" Grid.Row="2" 
-                   Text="{Binding Category}" ></Label>
+                       Text="{Binding Category}" ></Label>
 
                 <Label Grid.Column="0" Grid.Row="3"
-                   Text="Amount Of Money: " ></Label>
+                        Text="Amount Of Money: " ></Label>
                 <Label Grid.Column="1" Grid.Row="3"
-                   Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}" 
-                   TextColor="PaleVioletRed"></Label>
+                        Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}" 
+                        TextColor="{StaticResource txtExpenditureHeaderColor}"></Label>
 
                 <Label Grid.Column="0" Grid.Row="4"
-                   Text="Date Of Expenditure: " ></Label>
+                        Text="Date Of Expenditure: " ></Label>
                 <Label Grid.Column="1" Grid.Row="4"
-                   Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}" ></Label>
+                        Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}" ></Label>
 
                 <Label Grid.Column="0" Grid.Row="5"
-                   Text="Note: " ></Label>
+                        Text="Note: " ></Label>
                 <Label Grid.Column="1" Grid.Row="5"
-                   Text="{Binding Note}" 
-                   TextColor="ForestGreen"></Label>
+                        Text="{Binding Note}" 
+                        TextColor="ForestGreen"></Label>
             </Grid>
             <Button Text="Delete" 
                     FontSize="Medium" 

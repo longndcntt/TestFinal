@@ -126,13 +126,13 @@ namespace TestFinal.ViewModels
                     new Entry((float)TotalReceipt)
                     {
                          Label = "Receipt",
-                        ValueLabel = TotalReceipt.ToString(),
+                        ValueLabel = DoubleToCurrency(TotalReceipt),
                         Color = SKColor.Parse("#21FF94")
                     },
                     new Entry((float)TotalExpenditure)
                     {
                          Label = "Expenditure",
-                        ValueLabel = TotalExpenditure.ToString(),
+                        ValueLabel = DoubleToCurrency(TotalExpenditure),
                         Color = SKColor.Parse("#e00707")
                     }
                 };
@@ -141,6 +141,13 @@ namespace TestFinal.ViewModels
                 Chart.LabelTextSize = 26;
                 Chart.BackgroundColor = SKColor.Parse("#fefefe");
             }
+        }
+        
+        public string DoubleToCurrency(double c)
+        {
+            c = c / 22000;
+            string s = string.Format("{0:C2}", c);
+            return s;
         }
         #endregion
 

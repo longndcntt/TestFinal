@@ -15,25 +15,18 @@
     <ScrollView>
         <StackLayout HorizontalOptions="Fill"
                      VerticalOptions="Start">
-            <Grid BackgroundColor="Black" 
+            <Grid BackgroundColor="{StaticResource HeaderBackground}" 
                   HeightRequest="80">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width='250'></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Image="back.png"
-                        BackgroundColor="Black"
-                        Grid.Column="0"
+                <Button Style="{StaticResource btnBack}"
                         Margin="10"
-                        VerticalOptions="Center"
-                        Command="{Binding BackCommand}"
-                     ></Button>
+                        Command="{Binding BackCommand}"/>
                 <Label Text="Add Receipt" 
-                       TextColor="ForestGreen"
-                       FontSize="Large" 
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Center"
+                       Style="{StaticResource txtReceiptHeaderStyle}"
                        Grid.Column="1"
                    ></Label>
             </Grid>
@@ -58,8 +51,11 @@
                 </Grid>
                 <!--Receipt Info-->
                 <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" 
-                      x:Name="entTitle"></Entry>
+                       Placeholder="Title"
+                       x:Name="entTitle"></Entry>
                 <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
+                        Title="CHOOSE THE CATEGORY"
+                        FontSize="15"
                         SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                         HorizontalOptions="Fill"
                         x:Name="pckCategory"/>

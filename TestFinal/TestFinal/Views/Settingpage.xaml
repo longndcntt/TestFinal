@@ -28,8 +28,8 @@
         <Picker ItemsSource="{Binding Languages}"
                 ItemDisplayBinding="{Binding DisplayName}"
                 SelectedItem="{Binding  SelectedLanguage}"
+                Title="Choose the language"
                 >
-           
             <Picker.Behaviors>
                 <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
                                                   Command="{Binding SelectedLanguageChangedCommand}"></behaviors:EventToCommandBehavior>

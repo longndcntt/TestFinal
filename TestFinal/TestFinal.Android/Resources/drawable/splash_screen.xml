@@ -9,7 +9,5 @@
         android:tileMode="disabled"
         android:gravity="center"/>
   </item>
-  <item>
-    
-  </item>
+  
 </layer-list>

@@ -6,7 +6,7 @@ using Prism.Ioc;
 
 namespace TestFinal.Droid
 {
-    [Activity(Label = "TestFinal", Icon = "@drawable/Icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Accountant App", Icon = "@drawable/Icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

@@ -24,20 +24,12 @@
                 <ColumnDefinition Width='250'></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Image="back.png"
-                        BackgroundColor="Black"
-                        Grid.Column="0"
-                        Margin="10"
-                        VerticalOptions="Center"
-                        Command="{Binding BackCommand}"
-                     ></Button>
+            <Button Style="{StaticResource btnBack}"
+                    Grid.Column="0"
+                    Command="{Binding BackCommand}"/>
             <Label Text="Receipt Detail" 
-                   TextColor="ForestGreen"
-                   FontSize="Large" 
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"
-                   Grid.Column="1"
-                   ></Label>
+                   Style="{StaticResource txtReceiptHeaderStyle}"
+                   Grid.Column="1"/>
             <Button Text="Edit" 
                     TextColor="White"
                     BackgroundColor="Black"
@@ -84,7 +76,7 @@
                    Text="Amount Of Money: " ></Label>
                 <Label Grid.Column="1" Grid.Row="3"
                    Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}" 
-                   TextColor="ForestGreen"></Label>
+                   TextColor="{StaticResource txtReceiptMoneyColor}"></Label>
 
                 <Label Grid.Column="0" Grid.Row="4"
                    Text="Date Of Receipt: " ></Label>

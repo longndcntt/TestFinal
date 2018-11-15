@@ -24,18 +24,11 @@
                     <ColumnDefinition Width='250'></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Image="back.png"
-                        BackgroundColor="Black"
-                        Grid.Column="0"
+                <Button Style="{StaticResource btnBack}"
                         Margin="10"
-                        VerticalOptions="Center"
-                        Command="{Binding BackCommand}"
-                     ></Button>
+                        Command="{Binding BackCommand}"/>
                 <Label Text="STATISTIC" 
-                       TextColor="PaleVioletRed"
-                       FontSize="Large" 
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Center"
+                       Style="{StaticResource txtExpenditureHeaderStyle}"
                        Grid.Column="1"
                    ></Label>
             </Grid>
@@ -131,7 +124,7 @@
                                         <Label Grid.Column="3" Grid.Row="0"
                                                    Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
                                                    FontSize="Medium"
-                                                   TextColor="MediumVioletRed"
+                                                   TextColor="{StaticResource txtExpenditureMoneyColor}"
                                                     ></Label>
                                         <Label Grid.Column="3" Grid.Row="1"
                                                    FontSize="Medium"
@@ -154,7 +147,7 @@
                                FontAttributes="Bold"
                                FontSize="Large"></Label>
                             <Label Text="{Binding Total, Converter={StaticResource CovertToCurrency}}"
-                               TextColor="PaleVioletRed"
+                               TextColor="{Binding txtExpenditureHeaderColor}"
                                FontAttributes="Bold"
                                FontSize="Large"></Label>
                         </StackLayout>

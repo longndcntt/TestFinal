@@ -30,6 +30,7 @@
                 <Label Text="SIGN UP" 
                        TextColor="White"
                        FontSize="Medium" 
+                       VerticalOptions="Center"
                        Grid.Column="1"
                        HorizontalOptions="CenterAndExpand"></Label>
             </Grid>

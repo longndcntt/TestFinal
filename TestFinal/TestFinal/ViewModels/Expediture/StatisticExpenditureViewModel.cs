@@ -205,97 +205,91 @@ namespace TestFinal.ViewModels
                     new Entry((float)eat_and_drink)
                 {
                     Label = "Ăn uống, nội trợ",
-                    ValueLabel = eat_and_drink.ToString(),
+                    ValueLabel = DoubleToCurrency(eat_and_drink),
                     Color = SKColor.Parse("#39241e")
                 },
                 new Entry((float)gift)
                 {
                     Label = "Quà tặng",
-                    ValueLabel = gift.ToString(),
+                    ValueLabel = DoubleToCurrency(gift),
                     Color = SKColor.Parse("#1d8b24")
                 },
                 new Entry((float)party)
                 {
                      Label = "Tiệc tùng",
-                     ValueLabel = party.ToString(),
+                     ValueLabel = DoubleToCurrency(party),
                      Color = SKColor.Parse("#809c79")
                 },
                 new Entry((float)entertainment)
                 {
                      Label = "Giải trí",
-                     ValueLabel = entertainment.ToString(),
+                     ValueLabel = DoubleToCurrency(entertainment),
                      Color = SKColor.Parse("#3ec797")
                 },
                     new Entry((float)medical)
                 {
                     Label = "Y tế",
-                    ValueLabel = medical.ToString(),
+                    ValueLabel = DoubleToCurrency(medical),
                     Color = SKColor.Parse("#86825a")
                 },
                      new Entry((float)travel)
                 {
                     Label = "Du lịch",
-                    ValueLabel = travel.ToString(),
+                    ValueLabel = DoubleToCurrency(travel),
                     Color = SKColor.Parse("#947565")
                 },
                       new Entry((float)shopping)
                 {
                     Label = "Mua sắm",
-                    ValueLabel = shopping.ToString(),
+                    ValueLabel = DoubleToCurrency(shopping),
                     Color = SKColor.Parse("#a0db8e")
                 },
                        new Entry((float)telephone)
                 {
                     Label = "Điện thoại",
-                    ValueLabel = telephone.ToString(),
+                    ValueLabel = DoubleToCurrency(telephone),
                     Color = SKColor.Parse("#9dd7b4")
                 },
                         new Entry((float)transport)
                 {
                     Label = "Phương tiện di chuyển",
-                    ValueLabel = transport.ToString(),
+                    ValueLabel = DoubleToCurrency(transport),
                     Color = SKColor.Parse("#ffa500")
                 },
                          new Entry((float)household)
                 {
                     Label = "Gia dụng",
-                    ValueLabel = household.ToString(),
+                    ValueLabel = DoubleToCurrency(household),
                     Color = SKColor.Parse("#000080")
                 },
                           new Entry((float)eletricity_water)
                 {
                     Label = "Điện nước, tiền nhà",
-                    ValueLabel = eletricity_water.ToString(),
+                    ValueLabel = DoubleToCurrency(eletricity_water),
                     Color = SKColor.Parse("#b6fcd5")
                 },
                            new Entry((float)school_fee)
                 {
                     Label = "Học phí",
-                    ValueLabel = school_fee.ToString(),
+                    ValueLabel = DoubleToCurrency(school_fee),
                     Color = SKColor.Parse("#eadcce")
                 },
-                    new Entry((float)another)
-                {
-                    Label = "Học phí",
-                    ValueLabel = another.ToString(),
-                    Color = SKColor.Parse("#ffd700")
-                },
-                    new Entry((float)loan)
+                           new Entry((float)loan)
                 {
                     Label = "Cho vay",
-                    ValueLabel = loan.ToString(),
+                    ValueLabel = DoubleToCurrency(loan),
                     Color = SKColor.Parse("#b2bd7e")
                 },
                      new Entry((float)acquittancce)
                 {
                     Label = "Trả nợ",
-                    ValueLabel = acquittancce.ToString(),
+                    ValueLabel = DoubleToCurrency(acquittancce),
                     Color = SKColor.Parse("#008282")
                 },
                       new Entry((float)another)
                 {
                     Label = "Các khoản khác",
-                    ValueLabel = another.ToString(),
+                    ValueLabel = DoubleToCurrency(another),
                     Color = SKColor.Parse("#eadcce")
                 },
                 };
@@ -309,6 +303,13 @@ namespace TestFinal.ViewModels
             {
                 IsExist = false;
             }
+        }
+
+        public string DoubleToCurrency(double c)
+        {
+            c = c / 22000;
+            string s = string.Format("{0:C2}", c);
+            return s;
         }
         #endregion
 

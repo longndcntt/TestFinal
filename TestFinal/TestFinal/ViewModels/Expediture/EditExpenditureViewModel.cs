@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TestFinal.Enums;
+using TestFinal.Helpers;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -40,7 +42,8 @@ namespace TestFinal.ViewModels
         public string Note { get => _note; set { SetProperty(ref _note, value); } }
         public Expenditure SelectedExpenditure
         {
-            get => _selectedExpenditure; set
+            get => _selectedExpenditure;
+            set
             {
                 SetProperty(ref _selectedExpenditure, value);
                 if (SelectedExpenditure != null)
@@ -103,7 +106,7 @@ namespace TestFinal.ViewModels
                         if (db.UpdateExpenditure(Expenditure))
                         {
                             await App.Current.MainPage.DisplayAlert("Notify", "Update Successfully", "OK");
-                            await _navigationService.NavigateAsync("PrismPage");
+                            await _navigationService.NavigateAsync(PageManager.PrismPage);
                         }
                     }
                     else
@@ -120,9 +123,9 @@ namespace TestFinal.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.ContainsKey("EditExpenditure"))
+            if (parameters.ContainsKey(ParamKey.EditExpenditure.ToString()))
             {
-                SelectedExpenditure = (Expenditure)parameters["EditExpenditure"];
+                SelectedExpenditure = (Expenditure)parameters[ParamKey.EditExpenditure.ToString()];
             }
         }
 

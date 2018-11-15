@@ -14,7 +14,7 @@ namespace TestFinal.ViewModels
         #region Properties
         INavigationService _navigationService;
         Database db;
-        private string _title;
+        
         private string _kind;
         private string _selectedcategory;
         private double _amountOfMoney;
@@ -23,7 +23,13 @@ namespace TestFinal.ViewModels
         private string _note;
         private List<string> _category;
 
-        public string TitleExpenditure { get => _title; set { SetProperty(ref _title, value); } }
+        private string _title;
+        public string TitleExpenditure
+        {
+            get => _title;
+            set { SetProperty(ref _title, value); }
+        }
+
         public string Kind { get => _kind; set { SetProperty(ref _kind, value); } }
         public string SelectedCategory { get => _selectedcategory; set { SetProperty(ref _selectedcategory, value); } }
         public double AmountOfMoney { get => _amountOfMoney; set { SetProperty(ref _amountOfMoney, value); } }

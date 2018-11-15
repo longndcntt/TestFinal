@@ -32,10 +32,7 @@
                         Command="{Binding BackCommand}"
                      ></Button>
                 <Label Text="Statistic" 
-                       TextColor="ForestGreen"
-                       FontSize="Large" 
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="Center"
+                       Style="{StaticResource txtReceiptHeaderStyle}"
                        Grid.Column="1"
                    ></Label>
             </Grid>
@@ -88,7 +85,6 @@
                 <!--Receipt List-->
                 <StackLayout Margin="10">
                     <Label HorizontalOptions="Center"
-                           FontSize="Medium"
                            Text="Receipt List"
                            IsVisible="{Binding IsExist}"></Label>
                 </StackLayout>

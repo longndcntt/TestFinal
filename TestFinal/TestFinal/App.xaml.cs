@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using TestFinal.Helpers;
 using TestFinal.ViewModels;
 using TestFinal.Views;
 using Xamarin.Forms;

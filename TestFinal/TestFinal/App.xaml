@@ -4,8 +4,63 @@
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              x:Class="TestFinal.App">
 	<Application.Resources>
-
 		<!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Color x:Key="HeaderBackground">Black</Color>
+            <!-- Expenditure text color-->
+            <Color x:Key="txtExpenditureHeaderColor">PaleVioletRed</Color>
+            <Color x:Key="txtExpenditureMoneyColor">MediumVioletRed</Color>
+
+            <!-- Receipt text color-->
+            <Color x:Key="txtReceiptHeaderColor">ForestGreen</Color>
+            <Color x:Key="txtReceiptMoneyColor">ForestGreen</Color>
+
+            <!--Button back-->
+            <Style x:Key="btnBack" TargetType="Button">
+                <Setter Property="Image" Value="back.png"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+                <Setter Property="Margin" Value="10"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+               
+            </Style>
+            
+            <!--Header-->
+            <Style x:Key="txtReceiptHeaderStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource txtReceiptHeaderColor}"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <Style x:Key="txtExpenditureHeaderStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource txtExpenditureHeaderColor}"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <!--Picker category-->
+            <Style x:Key="pckCategory" TargetType="Picker">
+                <Setter Property="Title" Value="CHOOSE THE CATEGORY"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+            </Style>
+
+            <Style x:Key="lblListViewItem" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            
+            <!--Button add-->
+            <Style x:Key="btnAdd" TargetType="Button">
+                <Setter Property="BorderRadius" Value="50"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Margin" Value="0,0,15,40"/>
+                <Setter Property="HeightRequest" Value="65"/>
+                <Setter Property="HeightRequest" Value="65"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="Text" Value="+"/>
+            </Style>
+        </ResourceDictionary>
 
 	</Application.Resources>
 </prism:PrismApplication>

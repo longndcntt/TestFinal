@@ -13,24 +13,16 @@
             <Grid BackgroundColor="Black" 
                   HeightRequest="80">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Image="back.png"
-                        BackgroundColor="Black"
+                <Button Style="{StaticResource btnBack}"
                         Grid.Column="0"
-                        Margin="10"
-                        VerticalOptions="Center"
-                        Command="{Binding BackCommand}"
-                     ></Button>
+                        Command="{Binding BackCommand}"/>
                 <Label Text="Edit Receipt" 
-                   TextColor="ForestGreen"
-                   FontSize="Large" 
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"
-                   Grid.Column="1"
-                   ></Label>
+                       Style="{StaticResource txtReceiptHeaderColor}"
+                       Grid.Column="1"/>
                 <Button BackgroundColor="Black"
                         TextColor="White"
                         FontSize="Small" 
@@ -57,26 +49,26 @@
                     </Grid.ColumnDefinitions>
                     <!--Take picture button-->
                     <Button Grid.Column="0"
-                    HorizontalOptions="EndAndExpand"
-                    Text="Take picture"></Button>
+                            HorizontalOptions="EndAndExpand"
+                            Text="Take picture"></Button>
                     <!--Pick picture button-->
                     <Button Grid.Column="1"
-                    HorizontalOptions="Start"
-                    Text="Pick picture"></Button>
+                            HorizontalOptions="Start"
+                            Text="Pick picture"></Button>
                 </Grid>
                 <!--Receipt Info-->
                 <StackLayout Margin="10,5,10,0">
                     <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" Placeholder="Title"></Entry>
                     <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
-                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                            HorizontalOptions="Fill"/>      
+                            Style="{StaticResource pckCategory}"
+                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"/>      
                     <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
                         <Entry.Behaviors>
                             <local:NumberValidationBehavior />
                         </Entry.Behaviors>
                     </Entry>
                     <DatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
-                                Format="dd/MM/yyyy"></DatePicker>
+                                Format="dd/MM/yyyy"/>
                     <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
                 </StackLayout>
             </StackLayout>

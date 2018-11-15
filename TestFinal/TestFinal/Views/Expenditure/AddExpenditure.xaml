@@ -22,19 +22,12 @@
                     <ColumnDefinition Width='250'></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Image="back.png"
-                        BackgroundColor="Black"
+                <Button Style="{Binding btnBack}"
                         Grid.Column="0"
-                        Margin="10"
-                        VerticalOptions="Center"
                         Command="{Binding BackCommand}"
                      ></Button>
-                <Label Text="Add Expenditure" 
-                   TextColor="PaleVioletRed"
-                   FontSize="Large" 
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"
-                   Grid.Column="1"
+                <Label Style="{StaticResource txtExpenditureHeaderStyle}"
+                       Grid.Column="1"
                    ></Label>
             </Grid>
             <StackLayout>
@@ -49,19 +42,19 @@
                     </Grid.ColumnDefinitions>
                     <!--Take picture button-->
                     <Button Grid.Column="0"
-                    HorizontalOptions="EndAndExpand"
-                    Text="Take picture"></Button>
+                            HorizontalOptions="EndAndExpand"
+                            Text="Take picture"></Button>
                     <!--Pick picture button-->
                     <Button Grid.Column="1"
-                    HorizontalOptions="Start"
-                    Text="Pick picture"></Button>
+                            HorizontalOptions="Start"
+                            Text="Pick picture"></Button>
                 </Grid>
                 <!--Expenditure Info-->
                 <StackLayout Margin="10,5,10,5">
                     <Entry Text="{Binding TitleExpenditure,Mode=TwoWay}" Placeholder="Title"></Entry>
                     <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
                             SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                            HorizontalOptions="Fill"/>  
+                            Style="{StaticResource pckCategory}"/>  
                     <Entry Text="{Binding AmountOfMoneyString,Mode=OneWayToSource}" Placeholder="Amount of money">
                         <Entry.Behaviors>
                             <local:NumberValidationBehavior />

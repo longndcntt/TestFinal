@@ -14,16 +14,16 @@
     <StackLayout>
         <!--Header-->
         <Grid BackgroundColor="Black" 
-                      HeightRequest="80">
-            <Label Text="{translate:Translate ACCOUNTANT}" 
+              HeightRequest="80">
+            <Label Text="ACCOUNTANT" 
                    TextColor="White"
                    FontSize="Large" 
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="Center"></Label>
         </Grid>
         <StackLayout Margin="20" HorizontalOptions="FillAndExpand"
-                 VerticalOptions="CenterAndExpand"
-                 Orientation="Vertical">
+                     VerticalOptions="CenterAndExpand"
+                     Orientation="Vertical">
             <!--Icon-->
             <Image Source="Icon.png" 
                    HorizontalOptions="Center"></Image>
@@ -35,7 +35,6 @@
                    Text="{Binding Password,Mode=OneWayToSource}"
                    x:Name="entPassword"
                    IsPassword="True"></Entry>
-            
             <Button Text="LOG IN" Command="{Binding LoginCommand}"
                     BackgroundColor="#48525e">
                 <Button.Triggers>
