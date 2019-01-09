@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:local="clr-namespace:TestFinal.Behavior"
+             xmlns:imageEntry="clr-namespace:TestFinal.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.EditExpenditure"
              NavigationPage.HasNavigationBar="False">
@@ -58,19 +59,24 @@
                             Text="Pick picture"></Button>
                 </Grid>
                 <!--Expenditure Info-->
-                <StackLayout Margin="10,5,10,0">
-                    <Entry Text="{Binding TitleExpenditure,Mode=TwoWay}" Placeholder="Title"></Entry>
+                <StackLayout Margin="15,5,15,0">
+                    <imageEntry:ImageEntry Image="ic_text_document_with_title" 
+                                           Text="{Binding TitleExpenditure,Mode=TwoWay}" Placeholder="Title"></imageEntry:ImageEntry>
                     <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
                             SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                             Style="{StaticResource pckCategory}"/>
-                    <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
+                    <imageEntry:ImageEntry Image="ic_money"  
+                                           Text="{Binding AmountOfMoneyString,Mode=TwoWay}"
+                                           Placeholder="Amount of money">
                         <Entry.Behaviors>
                             <local:NumberValidationBehavior />
                         </Entry.Behaviors>
-                    </Entry>
+                    </imageEntry:ImageEntry>
                     <DatePicker Date="{Binding DateOfExpenditure, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
                                 Format="dd/MM/yyyy"></DatePicker>
-                    <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+                    <imageEntry:ImageEntry Image="ic_writing"  
+                                           Text="{Binding Note,Mode=TwoWay}"
+                                           Placeholder="Note"></imageEntry:ImageEntry>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

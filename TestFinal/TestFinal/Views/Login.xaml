@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:entryImage="clr-namespace:TestFinal.Controls"
              x:Class="TestFinal.Views.MainPage"
              NavigationPage.HasNavigationBar="False"
-             xmlns:translate="clr-namespace:TestFinal.Helpers"
              xmlns:eventtrigger="clr-namespace:TestFinal.Trigger">
     <ContentPage.Resources>
         <Style TargetType="Entry">
@@ -28,13 +28,13 @@
             <Image Source="Icon.png" 
                    HorizontalOptions="Center"></Image>
             <!--Username and Password-->
-            <Entry Placeholder="Username"
+            <entryImage:ImageEntry Image="ic_user" Placeholder="Username"
                    Text="{Binding Username,Mode=OneWayToSource}"
-                   x:Name="entUsername"></Entry>
-            <Entry Placeholder="Password"
+                   x:Name="entUsername"></entryImage:ImageEntry>
+            <entryImage:ImageEntry Image="ic_lock" Placeholder="Password"
                    Text="{Binding Password,Mode=OneWayToSource}"
                    x:Name="entPassword"
-                   IsPassword="True"></Entry>
+                   IsPassword="True"></entryImage:ImageEntry>
             <Button Text="LOG IN" Command="{Binding LoginCommand}"
                     BackgroundColor="#48525e">
                 <Button.Triggers>

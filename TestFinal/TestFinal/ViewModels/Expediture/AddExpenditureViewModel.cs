@@ -138,6 +138,5 @@ namespace TestFinal.ViewModels
             return regex.IsMatch(pText);
         }
         #endregion
-
     }
 }

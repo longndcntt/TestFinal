@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:imageEntry="clr-namespace:TestFinal.Controls"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:local="clr-namespace:TestFinal.Behavior"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -57,19 +58,26 @@
                             Text="Pick picture"></Button>
                 </Grid>
                 <!--Receipt Info-->
-                <StackLayout Margin="10,5,10,0">
-                    <Entry Text="{Binding TitleReceipt,Mode=TwoWay}" Placeholder="Title"></Entry>
+                <StackLayout Margin="15,5,15,0">
+                    <imageEntry:ImageEntry Image="ic_text_document_with_title" 
+                                           Text="{Binding TitleReceipt,Mode=TwoWay}" 
+                                           Placeholder="Title"></imageEntry:ImageEntry>
                     <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
                             Style="{StaticResource pckCategory}"
-                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"/>      
-                    <Entry Text="{Binding AmountOfMoneyString,Mode=TwoWay}" Placeholder="Amount of money">
+                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"/>
+                    <imageEntry:ImageEntry Image="ic_money" 
+                                           Keyboard="Numeric"
+                                           Text="{Binding AmountOfMoneyString,Mode=TwoWay}" 
+                                           Placeholder="Amount of money">
                         <Entry.Behaviors>
                             <local:NumberValidationBehavior />
                         </Entry.Behaviors>
-                    </Entry>
+                    </imageEntry:ImageEntry>
                     <DatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
                                 Format="dd/MM/yyyy"/>
-                    <Entry Text="{Binding Note,Mode=TwoWay}" Placeholder="Note"></Entry>
+                    <imageEntry:ImageEntry Image="ic_writing" 
+                                           Text="{Binding Note,Mode=TwoWay}"
+                                           Placeholder="Note"></imageEntry:ImageEntry>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
