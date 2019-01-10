@@ -37,7 +37,7 @@
                 </Grid>
                 <StackLayout>
                     <!--Image-->
-                    <Image Source="{Binding ImagePath}" WidthRequest="100"
+                    <Image Source="{Binding Image}" WidthRequest="100"
                HeightRequest="200"
                HorizontalOptions="Center"></Image>
                     <Grid>
@@ -48,7 +48,8 @@
                         <!--Take picture button-->
                         <Button Grid.Column="0"
                             HorizontalOptions="EndAndExpand"
-                            Text="Take picture"></Button>
+                            Text="Take picture"
+                            Command="{Binding TakePhotoReceiveCommand}"/>
                         <!--Pick picture button-->
                         <Button Grid.Column="1"
                             HorizontalOptions="Start"
