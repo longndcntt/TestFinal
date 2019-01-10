@@ -3,9 +3,12 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Enums;
 using TestFinal.Model;
+using Xamarin.Forms;
 
 namespace TestFinal.ViewModels
 {
@@ -41,8 +44,25 @@ namespace TestFinal.ViewModels
                     AmountOfMoney = SelectedExpenditure.AmountOfMoney;
                     DateOfExpenditure = SelectedExpenditure.DateOfExpenditure;
                     Note = SelectedExpenditure.Note;
+                    ImageStream = SelectedExpenditure.Image;
                 }
             }
+        }
+
+        private ImageSource _image;
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
+
+        private byte[] _imageStream;
+
+        public byte[] ImageStream
+        {
+            get => _imageStream;
+            set => SetProperty(ref _imageStream, value);
         }
 
         #endregion
@@ -54,7 +74,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public ExpenditureDetailViewModel(INavigationService navigationService) : base(navigationService)
+        public ExpenditureDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();
@@ -111,6 +131,8 @@ namespace TestFinal.ViewModels
             if (parameters.ContainsKey(ParamKey.ExpenditureDetail.ToString()))
             {
                 SelectedExpenditure = (Expenditure)parameters[ParamKey.ExpenditureDetail.ToString()];
+                ImageStream = SelectedExpenditure.Image;
+                Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
             }
         }
 

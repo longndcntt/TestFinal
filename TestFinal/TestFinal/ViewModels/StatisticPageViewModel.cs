@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TestFinal.Model;
 using Microcharts;
+using Prism.Services;
 using SkiaSharp;
 
 namespace TestFinal.ViewModels
@@ -58,7 +59,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public StatisticPageViewModel(INavigationService navigationService) : base(navigationService)
+        public StatisticPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();

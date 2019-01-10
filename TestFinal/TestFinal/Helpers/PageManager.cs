@@ -23,7 +23,6 @@ namespace TestFinal.Helpers
         public static string EditExpenditure = "EditExpenditure";
         public static string ExpenditureDetail = "ExpenditureDetail";
         public static string StatisticExpenditure = "StatisticExpenditure";
-
-
+        
     }
 }

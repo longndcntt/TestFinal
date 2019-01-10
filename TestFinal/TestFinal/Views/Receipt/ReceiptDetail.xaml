@@ -38,7 +38,7 @@
             </Button>
         </Grid>
         <StackLayout Margin="5" HorizontalOptions="Center" WidthRequest="300">
-            <Image Source="{Binding ImagePath}" WidthRequest="100"
+            <Image Source="{Binding Image}" WidthRequest="100"
                HeightRequest="200"></Image>
             <Grid>
                 <Grid.ColumnDefinitions>
