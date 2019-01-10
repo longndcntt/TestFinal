@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -65,7 +66,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public StatisticExpenditureViewModel(INavigationService navigationService) : base(navigationService)
+        public StatisticExpenditureViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();

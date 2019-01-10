@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Model;
 
 namespace TestFinal.ViewModels
@@ -40,7 +41,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public SignUpViewModel(INavigationService navigationService) : base(navigationService)
+        public SignUpViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();

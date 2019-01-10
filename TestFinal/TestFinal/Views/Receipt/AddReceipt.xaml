@@ -33,10 +33,10 @@
                        Style="{StaticResource txtReceiptHeaderStyle}"
                        Grid.Column="1"
                    ></Label>
-                </Grid>
-                <StackLayout>
-                    <!--Image-->
-                    <Image Source="{Binding ImagePath}" WidthRequest="100"
+            </Grid>
+            <StackLayout>
+                <!--Image-->
+                <Image Source="{Binding Image}" WidthRequest="100"
                        HeightRequest="200"
                        HorizontalOptions="Center"></Image>
                     <Grid>
@@ -47,9 +47,10 @@
                         <!--Take picture button-->
                         <Button Grid.Column="0"
                             HorizontalOptions="EndAndExpand"
-                            Text="Take picture"></Button>
-                        <!--Pick picture button-->
-                        <Button Grid.Column="1"
+                            Text="Take picture"
+                            Command="{Binding TakePhotoReceiveCommand}"/>
+                    <!--Pick picture button-->
+                    <Button Grid.Column="1"
                             HorizontalOptions="Start"
                             Text="Pick picture"></Button>
                     </Grid>

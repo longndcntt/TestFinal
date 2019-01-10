@@ -3,11 +3,16 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Services;
 using TestFinal.Enums;
 using TestFinal.Helpers;
 using TestFinal.Model;
+using Xamarin.Forms;
 
 namespace TestFinal.ViewModels
 {
@@ -54,6 +59,7 @@ namespace TestFinal.ViewModels
                     AmountOfMoneyString = SelectedExpenditure.AmountOfMoney.ToString();
                     DateOfExpenditure = SelectedExpenditure.DateOfExpenditure;
                     Note = SelectedExpenditure.Note;
+                    ImageStream = SelectedExpenditure.Image;
                 }
             }
         }
@@ -66,7 +72,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public EditExpenditureViewModel(INavigationService navigationService) : base(navigationService)
+        public EditExpenditureViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();
@@ -77,9 +83,27 @@ namespace TestFinal.ViewModels
             //Delegate Command
             ConfirmCommand = new DelegateCommand(CofirmToSaveChange);
             BackCommand = new DelegateCommand(BackEvent);
+            TakePhotoReceiveCommand = new DelegateCommand(async () => await TakePhotoReceiveExecute());
+            ChoosePhotoReceiveCommand = new DelegateCommand(async () => await ChoosePhotoReceiveExecute());
         }
 
         #endregion
+
+        private ImageSource _image;
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
+
+        private byte[] _imageStream;
+
+        public byte[] ImageStream
+        {
+            get => _imageStream;
+            set => SetProperty(ref _imageStream, value);
+        }
 
         #region Handle Event
 
@@ -102,6 +126,7 @@ namespace TestFinal.ViewModels
                         Expenditure.DateOfExpenditure = DateOfExpenditure;
                         Expenditure.TitleExpenditure = TitleExpenditure;
                         Expenditure.Note = Note;
+                        Expenditure.Image = ImageStream;
 
                         if (db.UpdateExpenditure(Expenditure))
                         {
@@ -116,7 +141,30 @@ namespace TestFinal.ViewModels
                 }
             }
         }
-        
+
+        private string _imagePath;
+
+        public override async Task ChangeImage(string filePath, byte[] bytes)
+        {
+            _imagePath = filePath;
+            ImageStream = bytes;
+        }
+
+        public ICommand TakePhotoReceiveCommand { get; }
+
+        private async Task TakePhotoReceiveExecute()
+        {
+            await TakePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+        }
+
+        public ICommand ChoosePhotoReceiveCommand { get; }
+
+        private async Task ChoosePhotoReceiveExecute()
+        {
+            await ChoosePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+        }
         #endregion
 
         #region Method
@@ -126,6 +174,8 @@ namespace TestFinal.ViewModels
             if (parameters.ContainsKey(ParamKey.EditExpenditure.ToString()))
             {
                 SelectedExpenditure = (Expenditure)parameters[ParamKey.EditExpenditure.ToString()];
+                ImageStream = SelectedExpenditure.Image;
+                Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
             }
         }
 

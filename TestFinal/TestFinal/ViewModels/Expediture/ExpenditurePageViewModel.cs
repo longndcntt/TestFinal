@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Enums;
 using TestFinal.Helpers;
 using TestFinal.Model;
@@ -49,7 +50,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public ExpenditurePageViewModel(INavigationService navigationService) : base(navigationService)
+        public ExpenditurePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();

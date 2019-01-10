@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Model;
 using TestFinal.Resources;
 
@@ -15,13 +16,16 @@ namespace TestFinal.ViewModels
     public class SettingpageViewModel : ViewModelBase
     {
         #region Properties
-        INavigationService _navigationService;
+
+        readonly INavigationService _navigationService;
         private ObservableCollection<Language> _languages;
         private Language _selectedLanguage;
 
         public int MyProperty { get; set; }
-        public ObservableCollection<Language> Languagess { get => _languages; set { SetProperty(ref _languages, value); } }
-        public Language SelectedLanguage { get => _selectedLanguage; set { SetProperty(ref _selectedLanguage, value); } }
+        public ObservableCollection<Language> Languages { get => _languages; set => SetProperty(ref _languages, value);
+        }
+        public Language SelectedLanguage { get => _selectedLanguage; set => SetProperty(ref _selectedLanguage, value);
+        }
 
         #endregion
 
@@ -31,13 +35,19 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region constructor
-        public SettingpageViewModel(INavigationService navigationService) : base(navigationService)
+        public SettingpageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
-            Languagess = new ObservableCollection<Language>()
+
+            Languages = new ObservableCollection<Language>()
             {
                 new Language { DisplayName =  "English", ShortName = "en-US" },
                 new Language { DisplayName =  "Việt Nam", ShortName = "vi-Vn" }
+            };
+
+            var lang = new ObservableCollection<string>
+            {
+                 
             };
             SelectedLanguageChangedCommand = new DelegateCommand(SelectedLanguageChangedEvent);
         }

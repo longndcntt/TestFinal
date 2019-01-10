@@ -1,6 +1,8 @@
 ﻿using Prism;
 using Prism.Ioc;
+using TestFinal.Enums;
 using TestFinal.Helpers;
+using TestFinal.Model;
 using TestFinal.ViewModels;
 using TestFinal.Views;
 using Xamarin.Forms;
@@ -19,6 +21,7 @@ namespace TestFinal
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
         public App() : this(null) { }
+        public static AppSettings Settings { get; set; }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 

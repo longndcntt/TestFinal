@@ -15,5 +15,6 @@ namespace TestFinal.Model
         public double AmountOfMoney { get; set; }
         public DateTime DateOfExpenditure { get; set; }
         public string Note { get; set; }
+        public byte[] Image { get; set; }
     }
 }

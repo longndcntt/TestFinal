@@ -3,10 +3,15 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Services;
 using TestFinal.Enums;
 using TestFinal.Model;
+using Xamarin.Forms;
 
 namespace TestFinal.ViewModels
 {
@@ -50,6 +55,7 @@ namespace TestFinal.ViewModels
                     AmountOfMoneyString = SelectedReceipt.AmountOfMoney.ToString();
                     DateOfReceipt = SelectedReceipt.DateOfReceipt;
                     Note = SelectedReceipt.Note;
+                    ImageStream = SelectedReceipt.Image;
                 }
             }
         }
@@ -61,8 +67,21 @@ namespace TestFinal.ViewModels
 
         #endregion
 
+        public override void OnNavigatedNewTo(INavigationParameters parameters)
+        {
+            if (parameters != null)
+            {
+                if(parameters.ContainsKey(ParamKey.ReceiptDetail.ToString()))
+                {
+                    var result = (Receipt)parameters[ParamKey.ReceiptDetail.ToString()];
+                    ImageStream = result.Image;
+                    Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+                }
+            }
+        }
+
         #region Constructor
-        public EditReceiptViewModel(INavigationService navigationService) : base(navigationService)
+        public EditReceiptViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();
@@ -73,9 +92,27 @@ namespace TestFinal.ViewModels
             //Delegate Command
             ConfirmCommand = new DelegateCommand(CofirmToSaveChange);
             BackCommand = new DelegateCommand(BackEvent);
+            TakePhotoReceiveCommand = new DelegateCommand(async () => await TakePhotoReceiveExecute());
+            ChoosePhotoReceiveCommand = new DelegateCommand(async () => await ChoosePhotoReceiveExecute());
         }
 
         #endregion
+
+        private ImageSource _image;
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
+
+        private byte[] _imageStream;
+
+        public byte[] ImageStream
+        {
+            get => _imageStream;
+            set => SetProperty(ref _imageStream, value);
+        }
 
         #region Handle Event
 
@@ -99,6 +136,7 @@ namespace TestFinal.ViewModels
                         receipt.DateOfReceipt = DateOfReceipt;
                         receipt.TitleReceipt = TitleReceipt;
                         receipt.Note = Note;
+                        receipt.Image = ImageStream;
                         if (db.UpdateReceipt(receipt))
                         {
                             await App.Current.MainPage.DisplayAlert("Notify", "Update Successfully", "OK");
@@ -112,6 +150,30 @@ namespace TestFinal.ViewModels
                 }
             }
         }
+
+        private string _imagePath;
+
+        public override async Task ChangeImage(string filePath, byte[] bytes)
+        {
+            _imagePath = filePath;
+            ImageStream = bytes;
+        }
+
+        public ICommand TakePhotoReceiveCommand { get; }
+
+        private async Task TakePhotoReceiveExecute()
+        {
+            await TakePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+        }
+
+        public ICommand ChoosePhotoReceiveCommand { get; }
+
+        private async Task ChoosePhotoReceiveExecute()
+        {
+            await ChoosePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+        }
         #endregion
 
         #region Method
@@ -123,6 +185,8 @@ namespace TestFinal.ViewModels
             if (parameters.ContainsKey(ParamKey.EditReceipt.ToString()))
             {
                 SelectedReceipt = (Receipt)parameters[ParamKey.EditReceipt.ToString()];
+                ImageStream = SelectedReceipt.Image;
+                Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
             }
         }
 

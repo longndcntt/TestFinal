@@ -3,9 +3,14 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Prism.Services;
 using TestFinal.Model;
+using Xamarin.Forms;
 
 namespace TestFinal.ViewModels
 {
@@ -48,7 +53,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public AddExpenditureViewModel(INavigationService navigationService) : base(navigationService)
+        public AddExpenditureViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();
@@ -62,10 +67,28 @@ namespace TestFinal.ViewModels
             ClearCommand = new DelegateCommand(ClearInfo);
             CancelCommand = new DelegateCommand(Cancel);
             BackCommand = new DelegateCommand(BackEvent);
+            TakePhotoReceiveCommand = new DelegateCommand(async () => await TakePhotoReceiveExecute());
+            ChoosePhotoReceiveCommand = new DelegateCommand(async () => await ChoosePhotoReceiveExecute());
         }
 
 
         #endregion
+
+        private ImageSource _image;
+
+        public ImageSource Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
+
+        private byte[] _imageStream;
+
+        public byte[] ImageStream
+        {
+            get => _imageStream;
+            set => SetProperty(ref _imageStream, value);
+        }
 
         #region Handle Event
 
@@ -101,7 +124,8 @@ namespace TestFinal.ViewModels
                         Category = SelectedCategory,
                         AmountOfMoney = AmountOfMoney,
                         DateOfExpenditure = DateOfExpenditure,
-                        Note = Note
+                        Note = Note,
+                        Image = ImageStream,
                     };
                     if (db.InsertExpenditure(expenditure))
                     {
@@ -118,6 +142,31 @@ namespace TestFinal.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("Notify", "You haven't entered information yet!", "Ok");
             }
+        }
+
+        private string _imagePath;
+
+        public override async Task ChangeImage(string filePath, byte[] bytes)
+        {
+            _imagePath = filePath;
+            ImageStream = bytes;
+        }
+
+        public ICommand TakePhotoReceiveCommand { get; }
+
+        private async Task TakePhotoReceiveExecute()
+        {
+            await TakePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+        }
+
+        public ICommand ChoosePhotoReceiveCommand { get; }
+
+        private async Task ChoosePhotoReceiveExecute()
+        {
+            await ChoosePhotoExecute();
+            Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
+            
         }
         #endregion
 

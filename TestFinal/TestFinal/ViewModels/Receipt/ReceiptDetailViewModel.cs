@@ -3,9 +3,12 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Prism.Services;
 using TestFinal.Enums;
 using TestFinal.Model;
+using Xamarin.Forms;
 
 namespace TestFinal.ViewModels
 {
@@ -37,8 +40,25 @@ namespace TestFinal.ViewModels
                     AmountOfMoney = SelectedReceipt.AmountOfMoney;
                     DateOfReceipt = SelectedReceipt.DateOfReceipt;
                     Note = SelectedReceipt.Note;
+                    ImageStream = SelectedReceipt.Image;
                 }
             } }
+
+	    private ImageSource _image;
+
+	    public ImageSource Image
+	    {
+	        get => _image;
+	        set => SetProperty(ref _image, value);
+	    }
+
+	    private byte[] _imageStream;
+
+	    public byte[] ImageStream
+	    {
+	        get => _imageStream;
+	        set => SetProperty(ref _imageStream, value);
+	    }
 
         #endregion
 
@@ -49,7 +69,7 @@ namespace TestFinal.ViewModels
         #endregion
 
         #region Constructor
-        public ReceiptDetailViewModel(INavigationService navigationService) : base(navigationService)
+        public ReceiptDetailViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService, pageDialogService)
         {
             _navigationService = navigationService;
             db = new Database();
@@ -63,7 +83,7 @@ namespace TestFinal.ViewModels
 
         #endregion
 
-        #region Handle Event
+	    #region Handle Event
 
         private async void BackEvent()
         {
@@ -106,6 +126,8 @@ namespace TestFinal.ViewModels
             if (parameters.ContainsKey(ParamKey.ReceiptDetail.ToString()))
             {
                 SelectedReceipt = (Receipt)parameters[ParamKey.ReceiptDetail.ToString()];
+                ImageStream = SelectedReceipt.Image;
+                Image = ImageSource.FromStream(() => new MemoryStream(ImageStream));
             }
         }
         #endregion
