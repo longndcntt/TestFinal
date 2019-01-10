@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:TestFinal.Controls"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:imageEntry="clr-namespace:TestFinal.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -13,92 +14,94 @@
             <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
-        <StackLayout HorizontalOptions="Fill"
+    <views:KeyboardView Padding="0,0,0,0"
+                         VerticalOptions="FillAndExpand">
+        <ScrollView>
+            <StackLayout HorizontalOptions="Fill"
                      VerticalOptions="Start">
-            <Grid BackgroundColor="{StaticResource HeaderBackground}" 
+                <Grid BackgroundColor="{StaticResource HeaderBackground}" 
                   HeightRequest="80">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width='250'></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource btnBack}"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width='250'></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource btnBack}"
                         Margin="10"
                         Command="{Binding BackCommand}"/>
-                <Label Text="Add Receipt" 
+                    <Label Text="Add Receipt" 
                        Style="{StaticResource txtReceiptHeaderStyle}"
                        Grid.Column="1"
                    ></Label>
-            </Grid>
-            <StackLayout>
-                <!--Image-->
-                <Image Source="{Binding ImagePath}" WidthRequest="100"
+                </Grid>
+                <StackLayout>
+                    <!--Image-->
+                    <Image Source="{Binding ImagePath}" WidthRequest="100"
                        HeightRequest="200"
                        HorizontalOptions="Center"></Image>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <!--Take picture button-->
-                    <Button Grid.Column="0"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--Take picture button-->
+                        <Button Grid.Column="0"
                             HorizontalOptions="EndAndExpand"
                             Text="Take picture"></Button>
-                    <!--Pick picture button-->
-                    <Button Grid.Column="1"
+                        <!--Pick picture button-->
+                        <Button Grid.Column="1"
                             HorizontalOptions="Start"
                             Text="Pick picture"></Button>
-                </Grid>
-                <!--Receipt Info-->
-                <StackLayout Margin="15,5,15,5">
-                    <imageEntry:ImageEntry Image="ic_text_document_with_title" 
+                    </Grid>
+                    <!--Receipt Info-->
+                    <StackLayout Margin="15,5,15,5">
+                        <imageEntry:ImageEntry Image="ic_text_document_with_title" 
                                            Text="{Binding TitleReceipt,Mode=TwoWay}" 
                                            Placeholder="Title"
                                            x:Name="entTitle"></imageEntry:ImageEntry>
-                    <Picker ItemsSource="{Binding Category,Mode=TwoWay}"
-                        Title="CHOOSE THE CATEGORY"
-                        FontSize="15"
-                        SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                        HorizontalOptions="Fill"
-                        x:Name="pckCategory"/>
-                    <imageEntry:ImageEntry Image="ic_money" 
+                        <imageEntry:ImagePicker ItemsSource="{Binding Category,Mode=TwoWay}"
+                                            Style="{StaticResource Key=pckCategory}"
+                                            SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
+                                            x:Name="pckCategory"/>
+                        <imageEntry:ImageEntry Image="ic_money" 
                                            Text="{Binding AmountOfMoneyString,Mode=OneWayToSource}" 
                                            Placeholder="Amount of money"
                                            Keyboard="Numeric"
                                            x:Name="entMoney">
-                        <Entry.Behaviors>
-                            <local:NumberValidationBehavior />
-                        </Entry.Behaviors>
-                    </imageEntry:ImageEntry>
-                    <DatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
-                            Format="dd/MM/yyyy"></DatePicker>
-                    <imageEntry:ImageEntry Image="ic_writing" 
+                            <Entry.Behaviors>
+                                <local:NumberValidationBehavior />
+                            </Entry.Behaviors>
+                        </imageEntry:ImageEntry>
+                        <imageEntry:ImageDatePicker Date="{Binding DateOfReceipt, StringFormat='{}{0:dd/MM/yyyy}',Mode=OneWayToSource}" 
+                                                Style="{StaticResource Key=dtePicker}"
+                                                Format="dd/MM/yyyy"></imageEntry:ImageDatePicker>
+                        <imageEntry:ImageEntry Image="ic_writing" 
                                            Text="{Binding Note,Mode=TwoWay}" 
                                            Placeholder="Note"
                                            x:Name="entNote"></imageEntry:ImageEntry>
-                    <Grid Margin="20,5,20,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0"
+                        <Grid Margin="20,5,20,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
                             HorizontalOptions="Center"
                             Text="Add"
                             Command="{Binding AddReceiptCommand}">
-                        </Button>
-                        <Button Grid.Column="1"
+                            </Button>
+                            <Button Grid.Column="1"
                             HorizontalOptions="Center"
                             Text="Clear"
                             Command="{Binding ClearCommand}"></Button>
-                        <Button Grid.Column="2"
+                            <Button Grid.Column="2"
                             HorizontalOptions="Center"
                             Text="Cancel"
                             Command="{Binding CancelCommand}"></Button>
-                    </Grid>
+                        </Grid>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+    </views:KeyboardView>
 </ContentPage>

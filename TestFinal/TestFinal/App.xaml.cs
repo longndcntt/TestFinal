@@ -4,12 +4,14 @@ using TestFinal.Helpers;
 using TestFinal.ViewModels;
 using TestFinal.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TestFinal
 {
-    public partial class App
+    public partial class App 
     {
         /* 
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
@@ -22,8 +24,8 @@ namespace TestFinal
 
         protected override async void OnInitialized()
         {
+            App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
             InitializeComponent();
-
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 

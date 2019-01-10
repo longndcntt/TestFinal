@@ -2,126 +2,130 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:btnAdd="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+             xmlns:viewCell="clr-namespace:TestFinal.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestFinal.Views.ExpenditurePage"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              Title="Expenditure"
              Icon="Expenditures.png"
              NavigationPage.HasNavigationBar="False">
-    <ScrollView>
+    
         <!--Header-->
-        <StackLayout HorizontalOptions="Start">
-            <Grid BackgroundColor="Black" 
+    <StackLayout HorizontalOptions="Start">
+        <Grid BackgroundColor="Black" 
                   HeightRequest="80">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Total, Converter={StaticResource CovertToCurrency}}" 
+                        Style="{StaticResource txtExpenditureHeaderStyle}"
+                       Grid.Column="1"/>
+        </Grid>
+        <StackLayout HorizontalOptions="Fill"
+                             Orientation="Vertical"
+                             VerticalOptions="FillAndExpand">
+            <!-- Search -->
+            <viewCell:ImageEntry Placeholder="Search" 
+                                     Image="ic_search"
+                                     Text="{Binding SearchContent,Mode=OneWayToSource}"
+                                     HorizontalOptions="Center"
+                                     WidthRequest="200">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                          Command="{Binding TextChangedSearchCommand}">
+                    </behaviors:EventToCommandBehavior>
+                </Entry.Behaviors>
+            </viewCell:ImageEntry>
+            <!--Sort and statistic-->
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="250"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{Binding Total, Converter={StaticResource CovertToCurrency}}" 
-                        Style="{StaticResource txtExpenditureHeaderStyle}"
-                       Grid.Column="1"/>
-            </Grid>
-            <StackLayout HorizontalOptions="Fill"
-                             Orientation="Vertical"
-                             VerticalOptions="FillAndExpand">
-                <!-- Search -->
-                <Entry Placeholder="Search" Text="{Binding SearchContent}"
-                       HorizontalOptions="Center"
-                       WidthRequest="200">
-                    <Entry.Behaviors>
-                        <behaviors:EventToCommandBehavior EventName="TextChanged"
-                                                          Command="{Binding TextChangedSearchCommand}">
-                        </behaviors:EventToCommandBehavior>
-                    </Entry.Behaviors>
-                </Entry>
-                <!--Sort and statistic-->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <Picker ItemsSource="{Binding SortWay}" 
-                            Title="CHOOSE THE SORT WAY"
-                            SelectedIndex="{Binding SelectedWay, Mode=OneWayToSource}"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="Center"
-                            FontSize="15"
-                            Grid.Column="0">
-                        <Picker.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
+                <viewCell:ImagePicker ItemsSource="{Binding SortWay}" 
+                                          Title="CHOOSE THE SORT WAY"
+                                          Image="ic_filter"
+                                          SelectedIndex="{Binding SelectedWay, Mode=OneWayToSource}"
+                                          HorizontalOptions="FillAndExpand"
+                                          VerticalOptions="Center"
+                                          FontSize="15"
+                                          Grid.Column="0">
+                    <Picker.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged"
                                                               Command="{Binding SelectedChangedSortWayCommand}"></behaviors:EventToCommandBehavior>
-                        </Picker.Behaviors>
-                    </Picker>
+                    </Picker.Behaviors>
+                </viewCell:ImagePicker>
 
-                    <Button Text="Statistic" 
+                <Button Text="Statistic" 
                             Command="{Binding StatisticCommand}"
                             BackgroundColor="#48525e"
                             Grid.Column="1"
                             FontSize="18"
                             VerticalOptions="Center"
                             HorizontalOptions="End" Margin="0,0,20,0"></Button>
-                </Grid>
-                <!--Show Expenditure list-->
-                <Grid VerticalOptions="FillAndExpand" Margin="10,0,5,0">
-                    <ListView ItemsSource="{Binding ExpenditureList, Mode=TwoWay}"
+            </Grid>
+            <!--Show Expenditure list-->
+            <Grid VerticalOptions="FillAndExpand" Margin="10,0,5,0">
+                <ListView ItemsSource="{Binding ExpenditureList, Mode=TwoWay}"
                               SelectedItem="{Binding SelectedExpenditure, Mode=OneWayToSource}"
                               HasUnevenRows="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell >
-                                    <StackLayout Margin="0,2,0,0">
-                                        <Grid >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30"></ColumnDefinition>
-                                                <ColumnDefinition Width="2"></ColumnDefinition>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"></RowDefinition>
-                                                <RowDefinition Height="30"></RowDefinition>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <viewCell:CustomViewCell SelectedBackgroundColor="AliceBlue">
+                                <StackLayout Margin="0,2,0,0">
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                            <ColumnDefinition Width="2"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
 
-                                            </Grid.RowDefinitions>
-                                            <!--Icon for each Expenditure-->
-                                            <Image Grid.Column="0" 
+                                        </Grid.RowDefinitions>
+                                        <!--Icon for each Expenditure-->
+                                        <Image Grid.Column="0" 
                                                    Grid.RowSpan="2"
                                                    Grid.Row="0"
                                                    Source="Icon.png"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center"/>
-                                            <Label Grid.Column="2" Grid.Row="0"
+                                        <Label Grid.Column="2" Grid.Row="0"
                                                    Style="{Binding lblListViewItem}"
                                                    FontAttributes="Bold"
                                                    Text="{Binding TitleExpenditure}"/>
-                                            <Label Grid.Column="2" Grid.Row="1"
+                                        <Label Grid.Column="2" Grid.Row="1"
                                                    Style="{Binding lblListViewItem}"   
                                                    Text="{Binding Category}"/>
-                                            <Label Grid.Column="3" Grid.Row="0"
+                                        <Label Grid.Column="3" Grid.Row="0"
                                                    Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}"
                                                    Style="{Binding lblListViewItem}"
                                                    TextColor="{StaticResource txtExpenditureMoneyColor}"/>
-                                            <Label Grid.Column="3" Grid.Row="1"
+                                        <Label Grid.Column="3" Grid.Row="1"
                                                    Style="{Binding lblListViewItem}"
                                                    Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                                        </Grid>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                    </Grid>
+                                </StackLayout>
+                            </viewCell:CustomViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemTapped"
                                                               Command="{Binding SelectedExpenditureCommand}">
-                            </behaviors:EventToCommandBehavior>
-                        </ListView.Behaviors>
-                    </ListView>
-                    <Button Style="{StaticResource btnAdd}"
-                            Command="{Binding AddExpenditureCommand}"></Button>
-                </Grid>
-            </StackLayout>
-            <!--Button add-->
+                        </behaviors:EventToCommandBehavior>
+                    </ListView.Behaviors>
+                </ListView>
+                <Button Style="{StaticResource btnAdd}"
+                                                 Command="{Binding AddExpenditureCommand}"></Button>
+            </Grid>
         </StackLayout>
-    </ScrollView>
+        <!--Button add-->
+    </StackLayout>
 </ContentPage>

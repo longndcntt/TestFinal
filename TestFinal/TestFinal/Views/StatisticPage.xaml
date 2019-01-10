@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:TestFinal.Controls"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -44,28 +45,32 @@
                     <Label Text="To Date"
                            Grid.Row="0" Grid.Column="1"
                            ></Label>
-                    <DatePicker Grid.Column="0"
-                                Grid.Row="1"
-                                Date="{Binding FromDate,Mode=OneWayToSource}"
-                                Format="dd/MM/yyyy"
-                                x:Name="DateFrom">
+                    <controls:ImageDatePicker Grid.Column="0"
+                                              Style="{StaticResource Key=dtePicker}"
+                                              Grid.Row="1"
+                                              Date="{Binding FromDate,Mode=OneWayToSource}"
+                                              MaximumDate="{Binding Source={x:Reference DateTo},Path=Date}"
+                                              Format="dd/MM/yyyy"
+                                              x:Name="DateFrom">
                         <DatePicker.Behaviors>
                             <behaviors:EventToCommandBehavior EventName="DateSelected"
                                                               Command="{Binding ChangeDateCommand}">
                             </behaviors:EventToCommandBehavior>
                         </DatePicker.Behaviors>
-                    </DatePicker>
-                    <DatePicker Grid.Column="1"
-                                Grid.Row="1"
-                                Date="{Binding ToDate,Mode=OneWayToSource}"
-                                Format="dd/MM/yyyy"
-                                MinimumDate="{Binding Source={x:Reference DateFrom}}">
+                    </controls:ImageDatePicker>
+                    <controls:ImageDatePicker Grid.Column="1"
+                                              Style="{StaticResource Key=dtePicker}"
+                                              Grid.Row="1"
+                                              Date="{Binding ToDate,Mode=OneWayToSource}"
+                                              Format="dd/MM/yyyy"
+                                              x:Name="DateTo"
+                                              MinimumDate="{Binding Source={x:Reference DateFrom},Path=Date}">
                         <DatePicker.Behaviors>
                             <behaviors:EventToCommandBehavior EventName="DateSelected"
                                                               Command="{Binding ChangeDateCommand}">
                             </behaviors:EventToCommandBehavior>
                         </DatePicker.Behaviors>
-                    </DatePicker>
+                    </controls:ImageDatePicker>
                 </Grid>
                 <!--Chart-->
                 <StackLayout Margin="5">

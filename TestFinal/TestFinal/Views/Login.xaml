@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:entryImage="clr-namespace:TestFinal.Controls"
+             xmlns:views="clr-namespace:TestFinal.Controls"
              x:Class="TestFinal.Views.MainPage"
              NavigationPage.HasNavigationBar="False"
              xmlns:eventtrigger="clr-namespace:TestFinal.Trigger">
@@ -11,55 +12,56 @@
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
     </ContentPage.Resources>
-    <StackLayout>
-        <!--Header-->
-        <Grid BackgroundColor="Black" 
+    <views:KeyboardView Padding="0,0,0,0"
+                         VerticalOptions="FillAndExpand">
+        <StackLayout>
+            <!--Header-->
+            <Grid BackgroundColor="Black" 
               HeightRequest="80">
-            <Label Text="ACCOUNTANT" 
+                <Label Text="ACCOUNTANT" 
                    TextColor="White"
                    FontSize="Large" 
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="Center"></Label>
-        </Grid>
-        <StackLayout Margin="20" HorizontalOptions="FillAndExpand"
+            </Grid>
+            <StackLayout Margin="20" HorizontalOptions="FillAndExpand"
                      VerticalOptions="CenterAndExpand"
                      Orientation="Vertical">
-            <!--Icon-->
-            <Image Source="Icon.png" 
+                <!--Icon-->
+                <Image Source="Icon.png" 
                    HorizontalOptions="Center"></Image>
-            <!--Username and Password-->
-            <entryImage:ImageEntry Image="ic_user" Placeholder="Username"
+                <!--Username and Password-->
+                <entryImage:ImageEntry Image="ic_user" Placeholder="Username"
                    Text="{Binding Username,Mode=OneWayToSource}"
                    x:Name="entUsername"></entryImage:ImageEntry>
-            <entryImage:ImageEntry Image="ic_lock" Placeholder="Password"
+                <entryImage:ImageEntry Image="ic_lock" Placeholder="Password"
                    Text="{Binding Password,Mode=OneWayToSource}"
                    x:Name="entPassword"
                    IsPassword="True"></entryImage:ImageEntry>
-            <Button Text="LOG IN" Command="{Binding LoginCommand}"
+                <Button Text="LOG IN" Command="{Binding LoginCommand}"
                     BackgroundColor="#48525e">
-                <Button.Triggers>
-                    <MultiTrigger TargetType="Button">
-                        <MultiTrigger.Conditions>
-                            <BindingCondition Binding="{Binding Source={x:Reference entUsername},Path=Text.Length}"
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference entUsername},Path=Text.Length}"
                                               Value="0"></BindingCondition>
-                            <BindingCondition Binding="{Binding Source={x:Reference entPassword},Path=Text.Length}"
+                                <BindingCondition Binding="{Binding Source={x:Reference entPassword},Path=Text.Length}"
                                               Value="0"></BindingCondition>
-                        </MultiTrigger.Conditions>
-                        <Setter Property="IsEnabled" Value="False"></Setter>
-                    </MultiTrigger>
-                    <EventTrigger Event="Clicked">
-                        <eventtrigger:ButtonEventTrigger></eventtrigger:ButtonEventTrigger>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
-            <Label Text="OR" 
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </MultiTrigger>
+                        <EventTrigger Event="Clicked">
+                            <eventtrigger:ButtonEventTrigger></eventtrigger:ButtonEventTrigger>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Label Text="OR" 
                    FontSize="12" 
                    TextColor="DimGray"
                    HorizontalOptions="Center"></Label>
-            <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
+                <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
                     BackgroundColor="#48525e"></Button>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
-    
-
+    </views:KeyboardView>
 </ContentPage>

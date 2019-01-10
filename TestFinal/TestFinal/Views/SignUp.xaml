@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:TestFinal.Controls"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:local="clr-namespace:TestFinal.Behavior"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -12,65 +13,68 @@
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
     </ContentPage.Resources>
-    <ScrollView>
-        <StackLayout>
-            <Grid BackgroundColor="Black" HeightRequest="80">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Image="back.png"
+    <views:KeyboardView Padding="0,0,0,0"
+                         VerticalOptions="FillAndExpand">
+        <ScrollView>
+            <StackLayout>
+                <Grid BackgroundColor="Black" HeightRequest="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Image="back.png"
                         BackgroundColor="Black"
                         Grid.Column="0"
                         Margin="10"
                         VerticalOptions="Center"
                         Command="{Binding BackCommand}"
                      ></Button>
-                <Label Text="SIGN UP" 
+                    <Label Text="SIGN UP" 
                        TextColor="White"
                        FontSize="Medium" 
                        VerticalOptions="Center"
                        Grid.Column="1"
                        HorizontalOptions="CenterAndExpand"></Label>
-            </Grid>
-            <StackLayout Margin="20" 
+                </Grid>
+                <StackLayout Margin="20" 
                          HorizontalOptions="FillAndExpand"
                      VerticalOptions="CenterAndExpand"
-                     Orientation="Vertical">    
-                <Image Source="Icon.png" 
+                     Orientation="Vertical">
+                    <Image Source="Icon.png" 
                    HorizontalOptions="Center"></Image>
-                <Entry Placeholder="Username"
+                    <Entry Placeholder="Username"
                Text="{Binding Username,Mode=OneWayToSource}"></Entry>
-                <Entry Placeholder="Password"
+                    <Entry Placeholder="Password"
                Text="{Binding Password,Mode=OneWayToSource}"
                IsPassword="True"></Entry>
-                <Entry Placeholder="Re-enter password"
+                    <Entry Placeholder="Re-enter password"
                Text="{Binding Re-Password,Mode=OneWayToSource}"
                IsPassword="True"></Entry>
-                <Entry Placeholder="Full name"
+                    <Entry Placeholder="Full name"
                Text="{Binding DisplayName,Mode=OneWayToSource}"></Entry>
-                <Entry Placeholder="Age"
+                    <Entry Placeholder="Age"
                Text="{Binding Age,Mode=OneWayToSource}">
-                    <Entry.Behaviors>
-                        <local:MaxLengthValidatorBehavior  MaxLength="2"/>
-                        <local:NumberValidationBehavior />
-                    </Entry.Behaviors>
-                </Entry>
-                <Entry Placeholder="Adress"
+                        <Entry.Behaviors>
+                            <local:MaxLengthValidatorBehavior  MaxLength="2"/>
+                            <local:NumberValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry Placeholder="Adress"
                Text="{Binding Address,Mode=OneWayToSource}"></Entry>
-                <Entry Placeholder="Phone"
+                    <Entry Placeholder="Phone"
                Text="{Binding Phone,Mode=OneWayToSource}">
-                    <Entry.Behaviors>
-                        <local:MaxLengthValidatorBehavior  MaxLength="10"/>
-                        <local:NumberValidationBehavior />
-                    </Entry.Behaviors>
-                </Entry>
-                <Entry Placeholder="Company"
+                        <Entry.Behaviors>
+                            <local:MaxLengthValidatorBehavior  MaxLength="10"/>
+                            <local:NumberValidationBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Entry Placeholder="Company"
                Text="{Binding Company,Mode=OneWayToSource}"></Entry>
-                <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
+                    <Button Text="SIGN UP" Command="{Binding SignUpCommand}"
                 BackgroundColor="#48525e"></Button>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+    </views:KeyboardView>
 </ContentPage>

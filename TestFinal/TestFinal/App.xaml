@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:controls="clr-namespace:TestFinal.Controls"
+                        xmlns:btnadd="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+                        xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
                         xmlns:converters="clr-namespace:TestFinal.Coverter"
-                        x:Class="TestFinal.App">
+                        x:Class="TestFinal.App"
+                        >
 	<Application.Resources>
 		<!-- Application resource dictionary -->
         <converters:CovertToCurrency x:Key="CovertToCurrency"></converters:CovertToCurrency>
@@ -23,6 +26,7 @@
                 <Setter Property="BackgroundColor" Value="Black"></Setter>
                 <Setter Property="Margin" Value="10"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
                
             </Style>
             
@@ -40,11 +44,18 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             </Style>
             <!--Picker category-->
-            <Style x:Key="pckCategory" TargetType="Picker">
+            <Style x:Key="pckCategory" TargetType="controls:ImagePicker">
                 <Setter Property="Title" Value="CHOOSE THE CATEGORY"/>
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="Image" Value="ic_category"/>
+            </Style>
+            
+            <!--Date Picker-->
+            <Style x:Key="dtePicker" TargetType="controls:ImageDatePicker">
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="Image" Value="ic_date"/>
             </Style>
 
             <Style x:Key="lblListViewItem" TargetType="Label">
@@ -52,16 +63,14 @@
                 <Setter Property="LineBreakMode" Value="WordWrap"></Setter>
             </Style>
             
+
             <!--Button add-->
             <Style x:Key="btnAdd" TargetType="Button">
-                <Setter Property="BorderRadius" Value="50"/>
                 <Setter Property="HorizontalOptions" Value="End"/>
                 <Setter Property="VerticalOptions" Value="End"/>
-                <Setter Property="Margin" Value="0,0,15,40"/>
-                <Setter Property="HeightRequest" Value="65"/>
-                <Setter Property="HeightRequest" Value="65"/>
-                <Setter Property="FontSize" Value="25"/>
-                <Setter Property="Text" Value="+"/>
+                <Setter Property="Margin" Value="0,0,15,35"/>
+                <Setter Property="Image" Value="btn_Plus"/>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
             </Style>
         </ResourceDictionary>
 

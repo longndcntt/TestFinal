@@ -45,12 +45,12 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" 
                        FontAttributes="Bold"
@@ -69,13 +69,17 @@
                        Text="{Binding Category}" ></Label>
 
                 <Label Grid.Column="0" Grid.Row="3"
-                        Text="Amount Of Money: " ></Label>
+                        Text="Amount Of Money: "
+                        VerticalOptions="CenterAndExpand"
+                       LineBreakMode="WordWrap"></Label>
                 <Label Grid.Column="1" Grid.Row="3"
                         Text="{Binding AmountOfMoney, Converter={StaticResource CovertToCurrency}}" 
                         TextColor="{StaticResource txtExpenditureHeaderColor}"></Label>
 
                 <Label Grid.Column="0" Grid.Row="4"
-                        Text="Date Of Expenditure: " ></Label>
+                        Text="Date Of Expenditure: "
+                        VerticalOptions="CenterAndExpand"
+                        LineBreakMode="WordWrap"></Label>
                 <Label Grid.Column="1" Grid.Row="4"
                         Text="{Binding DateOfExpenditure,StringFormat='{}{0:dd/MM/yyyy}'}" ></Label>
 
