@@ -96,7 +96,7 @@ namespace TestFinal.ViewModels
                 {
                     var results =
                         await
-                            CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera, Permission.Storage);
+                            CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
                     cameraStatus = results[Permission.Camera];
                     storageStatus = results[Permission.Storage];
                 }

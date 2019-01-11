@@ -52,8 +52,9 @@
                             Command="{Binding TakePhotoReceiveCommand}"/>
                         <!--Pick picture button-->
                         <Button Grid.Column="1"
-                            HorizontalOptions="Start"
-                            Text="Pick picture"></Button>
+                                HorizontalOptions="Start"
+                                Text="Pick picture"
+                                Command="{Binding ChoosePhotoReceiveCommand}"></Button>
                     </Grid>
                     <!--Expenditure Info-->
                     <StackLayout Margin="15,5,15,5">

@@ -52,7 +52,8 @@
                     <!--Pick picture button-->
                     <Button Grid.Column="1"
                             HorizontalOptions="Start"
-                            Text="Pick picture"></Button>
+                            Text="Pick picture"
+                            Command="{Binding ChoosePhotoReceiveCommand}"></Button>
                     </Grid>
                     <!--Receipt Info-->
                     <StackLayout Margin="15,5,15,5">

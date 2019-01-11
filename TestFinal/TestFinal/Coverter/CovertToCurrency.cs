@@ -15,7 +15,7 @@ namespace TestFinal.Coverter
             if (value != null)
             {
                 CultureInfo TempCulture = new CultureInfo("en-US");
-                if (CrossMultilingual.Current.DeviceCultureInfo.ToString().Equals(TempCulture.ToString()))
+                if (CrossMultilingual.Current.CurrentCultureInfo.ToString().Equals(TempCulture.ToString()))
                 {
                     value = double.Parse(value.ToString());
                     value = (double)value/22000;
@@ -26,6 +26,7 @@ namespace TestFinal.Coverter
                 }
                 else
                 {
+                    value = double.Parse(value.ToString());
                     value = string.Format("{0:C}", value);
                     string s = value.ToString();
                     return s;
@@ -39,7 +40,7 @@ namespace TestFinal.Coverter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
